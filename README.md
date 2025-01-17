@@ -6,6 +6,11 @@ Transdimensional is a fancy name for a way to simplify the use of very complicat
 It is a kind of morphing that takes care of navigating through the synthesis parameter hyperspace.
 Thierry-Rochebois-I navigates in a 54 dimension hyperspace.
 
+## Thierry-Rochebois-I
+Yes, it's my real name. It can seem weird to name a synth after myself... but that's an easy way to avoid
+troubles with trademarks. I had many funny names in mind but most of them would have been a cause of conflict
+with existing products.
+
 ## Thierry-Rochebois-I-alpha000
 It is my first github publication for almost 5 years (I was pretty active with the Axoloti then).
 With alpha000 you already have 7 presets available (through midi program changes). 
