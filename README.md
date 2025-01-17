@@ -35,3 +35,15 @@ You only need a Teensy4.1 and a I2S audio DAC to try it.
 - Chorus
 - CC control of synthesis parameters
 - Presets through Midi Program Changes ( 7 presets already available on version alpha000).
+
+## CC
+
+| CC |    Description   | CC Values | Parameter Range |
+|----|------------------|-----------|-----------------|
+|   7|Volume            |  0..127   |                 |
+|  91|Reverb            |  0..7     |                 |
+|  93|Chorus Type       |  0..3     |                 |
+|  74|Filter Cutoff     |  0..127   |                 |
+|  73|Filter Mod        |  0..127   | -64..63         |
+|  72|Filter Decay time |  0..127   |                 |
+
