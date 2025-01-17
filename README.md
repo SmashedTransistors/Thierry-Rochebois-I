@@ -20,7 +20,7 @@ I will add more details about the hardware options and the various Midi controls
 
 ## Configurations
 ### Base
-1 Teensy and 1 I2S audio DAC
+You only need a Teensy4.1 and a I2S audio DAC to try it.
 ### Options
 - OLED SH1106 (for oscilloscope and parameter display) 
 - Midi Din (on RX1)
