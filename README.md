@@ -38,12 +38,14 @@ You only need a Teensy4.1 and a I2S audio DAC to try it.
 
 ## CC
 
-| CC |    Description   | CC Values | Parameter Range |
-|----|------------------|-----------|-----------------|
-|   7|Volume            |  0..127   |                 |
-|  91|Reverb            |  0..7     |                 |
-|  93|Chorus Type       |  0..3     |                 |
-|  74|Filter Cutoff     |  0..127   |                 |
-|  73|Filter Mod        |  0..127   | -64..63         |
-|  72|Filter Decay time |  0..127   |                 |
+| CC |    Description   | CC Values | Notes                    |
+|----|------------------|-----------|--------------------------|
+|   7|Volume            |  0..127   |                          |
+|  91|Reverb            |  0..7     |                          |
+|  93|Chorus Type       |  0..3     |                          |
+|----|------------------|-----------|--------------------------|
+|  74|Filter Cutoff     |  0..127   |                          |
+|  73|Filter Mod        |  0..127   | scales to -64..63 semitones |
+|  72|Filter Decay time |  0..127   |                          |
+|  71|Filter Resonance  |  0..5     |                          |
 
