@@ -63,6 +63,7 @@ Without morph modulation, the morphing from [A0,B0] to [A1,B1] is controlled by 
 With Morph Mod Depth part of the morphing will be controlled by the Morph Function Generator which have 8 different functions
 
 |Value|Description|Note|
+|-----|-----------|----|
 |0|Decay|The most used mode|
 |1|Note triggered LFO|starts like the decay and then goes back in the other direction...|
 |2|Decay + Note triggered LFO |Useful to have the sound still "alive" after the decay|
