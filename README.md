@@ -43,9 +43,33 @@ You only need a Teensy4.1 and a I2S audio DAC to try it.
 |   7|Volume            |  0..127   |                          |
 |  91|Reverb            |  0..7     |                          |
 |  93|Chorus Type       |  0..3     |                          |
-|----|------------------|-----------|--------------------------|
 |  74|Filter Cutoff     |  0..127   |                          |
 |  73|Filter Mod        |  0..127   | scales to -64..63 semitones |
 |  72|Filter Decay time |  0..127   |                          |
 |  71|Filter Resonance  |  0..5     |                          |
+|  16|Volume enveloppe  |  0..127   | 0 Gate -> 40 longer release -> 64 smooth AR -> Brass |
+|   1|ModWheel = MORPH  |  0..127   | The Morph parameter      |
+|  18|Morph Mod Depth   |  0..127   | if 127 the modulation takes full control and the modwheel has no effect|
+|  19|Morph Mod Rate    |  0..127   | The rate of mod modulation |
+|  77|Morph Function    |  0..7     | The morph modulator type... LFOs or enveloppes... see table below |
+|  78|A1 half hyperspace point 1 |  0..31    | 0..11 available on alpha000 |
+|  79|B1 half hyperspace point 1 |  0..32    | 0..11 + 32 available on alpha000 |
+|  75|A0 half hyperspace point 1 |  0..31    | 0..11 available on alpha000 |
+|  76|B0 half hyperspace point 1 |  0..32    | 0..11 + 32 available on alpha000 |
+|  94|Wave symetry ratio | 0..3 | for more or less squarish sounds |
+
+## Morph Function
+Without morph modulation, the morphing from [A0,B0] to [A1,B1] is controlled by the modwheel.
+With Morph Mod Depth part of the morphing will be controlled by the Morph Function Generator which have 8 different functions
+
+|Value|Description|Note|
+|0|Decay|The most used mode|
+|1|Note triggered LFO|starts like the decay and then goes back in the other direction...|
+|2|Decay + Note triggered LFO |Useful to have the sound still "alive" after the decay|
+|3|Decay + fast LFO ||
+|4|Common LFO | A common LFO is great for Phaser like modulation of the sound when playing chords|
+|5|Combination of LFOs| Vibrations... vibrations...|
+|6|Velocity modulated Decay|Expressive|
+|7|Random S&H|Let robots have a talk!|
+
 
