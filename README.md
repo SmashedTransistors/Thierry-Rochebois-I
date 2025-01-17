@@ -17,3 +17,21 @@ With alpha000 you already have 7 presets available (through midi program changes
 They are based on a recreation of classic waveforms and hardsync.
 
 I will add more details about the hardware options and the various Midi controls this week end.
+
+## Configurations
+### Base
+1 Teensy and 1 I2S audio DAC
+### Options
+- OLED SH1106 (for oscilloscope and parameter display) 
+- Midi Din (on RX1)
+- Akai APC25 Mk2 on USBHost for direct sound editing.
+- Secondary I2S audio DAC for symetrical outputs.
+
+## Features
+
+- 8 voice polyphony
+- 96kHz sample rate (for a brighter sound and controlled aliasing)
+- Reverberation
+- Chorus
+- CC control of synthesis parameters
+- Presets through Midi Program Changes ( 7 presets already available on version alpha000).
