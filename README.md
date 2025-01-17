@@ -39,6 +39,18 @@ You only need a Teensy4.1 and a I2S audio DAC to try it.
 - CC control of synthesis parameters
 - Presets through Midi Program Changes ( 7 presets already available on version alpha000).
 
+## Presets (alpha000)
+|PC|Preset|
+|--|------|
+|0|bass|
+|1|china|
+|2|chordéon (wheel)|
+|3|west (wheel)|
+|4|sync (wheel)|
+|5|sync harp(wheel)|
+|6|sync dream(wheel)|
+
+
 ## CC
 
 |  CC  |    Description   | CC Values | Notes                    |
