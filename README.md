@@ -100,6 +100,7 @@ The optional SCK must be grounded by adding a solder blob.
                          31              34
                          32              33
 ```
+![PCM5102A Breaout](./photos/PCM5102A_Breakout.jpg)
 ## Features
 
 - 8 voice polyphony
