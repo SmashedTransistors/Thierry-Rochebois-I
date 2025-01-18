@@ -22,6 +22,8 @@ They are based on a recreation of classic waveforms and hardsync.
 
 I will add more details about the hardware options and the various Midi controls this week end.
 
+![A short demo of these presets:](https://soundcloud.com/thierry-rochebois/testthierryrocheboisialpha000)
+
 ## Configurations
 ### Base
 You only need a Teensy4.1 and a I2S audio DAC to try it... but you can add some goodies if you want to go further.
