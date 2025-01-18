@@ -33,6 +33,37 @@ You only need a Teensy4.1 and a I2S audio DAC to try it... but you can add some 
 
 ![All Options](./photos/AllOptions.jpg)
 ![All Options](./photos/APCkey25MkII.jpg)
+             
+### Teensy4.1 to UDA1334A Breakout 
+[AdaFruit Id3678](https://www.adafruit.com/product/3678)  or copy
+
+```             
+             
+                        GND              Vin        -----------> VIN
+                          0              GND        -----------> GND
+                          1              3V3
+                          2              23
+                          3              22
+                          4              21  BCLK1  -----------> BCLK
+                          5              20  LRCLK1 -> 100 Ohm-> WSEL
+                          6              19
+      DIN <------- OUT1A  7              18            
+                          8              17
+                          9              16
+                         10              15
+                         11              14
+                         12              13
+                        3V3              GND
+                         24              41
+                         25              40
+                         26              39
+                         27              38
+                         28              37
+                         29              36
+                         30              35
+                         31              34
+                         32              33
+```
 
 ## Features
 
