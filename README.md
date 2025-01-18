@@ -2,7 +2,6 @@
 Teensy4.1 based Transdimensional Synthesizer number one.
 
 **You only need a Teensy4.1 and a I2S audio DAC to try it.**
-![a Teensy4.1 and an I2S DAC](./photos/Minimal_UDA1334.jpg)
 
 ## Transdimensional ?
 _Transdimensional_ is a fancy name for a way to simplify the use of very complicated synthesis algorithm.
@@ -64,7 +63,43 @@ You only need a Teensy4.1 and a I2S audio DAC to try it... but you can add some 
                          31              34
                          32              33
 ```
+![a Teensy4.1 and an I2S DAC](./photos/Minimal_UDA1334.jpg)
+This DAC does not need a master clock, it has its own PLL to generate it based on the LRCLK1 (WSEL).
+So this input is very sensitive to transients. To avoid issues, simply add a 100ohm resistor on the input of the breakout 
+(it will prevent inductive/capacitive oscillations).
 
+### Teensy4.1 to PCM5102A Breakout 
+They are quite cheap and high quality dacs.
+Most breakouts already have resistors on their inputs to avoid inductive oscillations.
+The optional SCK must be grounded by adding a solder blob.
+
+```             
+             
+                        GND              Vin        --> VIN
+                          0              GND        --> GND
+                          1              3V3
+                          2              23
+                          3              22
+                          4              21  BCLK1  --> BCK
+                          5              20  LRCLK1 --> LCK
+                          6              19
+      DIN <------- OUT1A  7              18            
+                          8              17
+                          9              16
+                         10              15
+                         11              14
+                         12              13
+                        3V3              GND
+                         24              41
+                         25              40
+                         26              39
+                         27              38
+                         28              37
+                         29              36
+                         30              35
+                         31              34
+                         32              33
+```
 ## Features
 
 - 8 voice polyphony
