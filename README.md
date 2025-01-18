@@ -1,4 +1,4 @@
-![Human created No AI used](./pictures/Human created.png)
+![Human created No AI used](./pictures/HumanCreated.png)
 # Thierry-Rochebois-I
 Teensy4.1 based Transdimensional Synthesizer number one.
 
