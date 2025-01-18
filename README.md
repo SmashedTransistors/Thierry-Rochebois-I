@@ -31,6 +31,9 @@ You only need a Teensy4.1 and a I2S audio DAC to try it... but you can add some 
 - Akai APC25 Mk2 on USBHost for direct sound editing.
 - Secondary I2S audio DAC for symetrical outputs.
 
+![All Options](./photos/AllOptions.jpg)
+![All Options](./photos/APCkey25MkII.jpg)
+
 ## Features
 
 - 8 voice polyphony
