@@ -22,7 +22,7 @@ They are based on a recreation of classic waveforms and hardsync.
 
 I will add more details about the hardware options and the various Midi controls this week end.
 
-![A short demo of these presets:]( https://soundcloud.com/thierry-rochebois/testthierryrocheboisialpha000 )
+A short demo of these presets: https://soundcloud.com/thierry-rochebois/testthierryrocheboisialpha000 
 
 ## Configurations
 ### Base
