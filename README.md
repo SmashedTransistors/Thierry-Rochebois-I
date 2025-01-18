@@ -2,7 +2,7 @@
 Teensy4.1 based Transdimensional Synthesizer number one.
 
 **You only need a Teensy4.1 and a I2S audio DAC to try it.**
-![a Teensy4.1 and an I2S DAC](./Photos/Minimal_UDA1334.jpg)
+![a Teensy4.1 and an I2S DAC](./photos/Minimal_UDA1334.jpg)
 
 ## Transdimensional ?
 _Transdimensional_ is a fancy name for a way to simplify the use of very complicated synthesis algorithm.
