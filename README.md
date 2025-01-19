@@ -168,5 +168,7 @@ An APC Key25 MarkII allows direct and live controls of synthesis parameters.
 
 ![APC Key25 MkII Morph controls](./pictures/APC25Morph.png)
 
-![APC Key25 MkII ilter controls](./pictures/APC25Filter.png)
+![APC Key25 MkII Filter controls](./pictures/APC25Filter.png)
+
+![APC Key25 MkII Other controls](./pictures/APC25Others.png)
 
