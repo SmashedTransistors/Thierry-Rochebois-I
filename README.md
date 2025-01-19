@@ -166,7 +166,7 @@ With Morph Mod Depth `CC18` part of the morphing will be controlled by the Morph
 
 An APC Key25 MarkII allows direct and live controls of synthesis parameters.
 
-[APC Key25 MkII Morph controls](./pictures/APC25Morph.png)
+![APC Key25 MkII Morph controls](./pictures/APC25Morph.png)
 
-[APC Key25 MkII ilter controls](./pictures/APC25Filter.png)
+![APC Key25 MkII ilter controls](./pictures/APC25Filter.png)
 
