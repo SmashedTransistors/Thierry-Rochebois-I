@@ -24,9 +24,11 @@ _Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
 
 
 ## Thierry-Rochebois-I
+
 Yes, it's my real name. It can seem weird to name a synth after myself... but that's an easy way to avoid
 troubles with trademarks. I had many funny names in mind but most of them would have been a cause of conflict
 with existing products.
+
 ----------------------------------------------------------------------------
 ## Versions
 ### Thierry-Rochebois-I-alpha001
