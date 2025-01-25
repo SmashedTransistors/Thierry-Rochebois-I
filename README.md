@@ -135,23 +135,17 @@ The optional SCK must be grounded by adding a solder blob.
 ----------------------------------------------------------------------------
 
 ## Presets (alpha001)
-| PC |Preset|
-|----|------|
-| 0  |bass|
-| 1  |china|
-| 2  |chordéon (wheel)|
-| 3  |west (wheel)|
-| 4  |sync (wheel)|
-| 5  |sync harp(wheel)|
-| 6  |sync dream(wheel)|
-| 7  |phaser(wheel)|
-| 8  |clav1|
-| 9  |clav2|
-| 10 |FM Bass|
-| 11 |space|
-| 12 |harsh1|
-| 13 |haunted|
-| 14 |Baroque|
+| PC | Preset            | PC | Preset  |
+|----|-------------------|----|---------|
+| `0` | bass              | `8` | clav1   |
+| `1` | china             | `9` | clav2   |
+| `2` | chordéon (wheel)  | `10` | FM Bass |
+| `3` | west (wheel)      | `11` | space   |
+| `4` | sync (wheel)      | `12` | harsh1  |
+| `5` | sync harp(wheel)  | `13` | haunted |
+| `6` | sync dream(wheel) | `14` | Baroque |
+| `7` | phaser(wheel)     | `15` |         |
+
 
 
 ## CC
@@ -180,16 +174,31 @@ The optional SCK must be grounded by adding a solder blob.
 Without morph modulation, the morphing from [A0,B0] to [A1,B1] is controlled by the modwheel.
 With Morph Mod Depth `CC18` part of the morphing will be controlled by the Morph Function Generator which provides 8 different functions selected by `CC77`
 
-|Value|Description|Note|
-|-----|-----------|----|
-|0|Decay|The most used mode|
-|1|Note triggered LFO|starts like the decay and then goes back in the other direction...|
-|2|Decay + Note triggered LFO |Useful to have the sound still "alive" after the decay|
-|3|Decay + fast LFO ||
-|4|Common LFO | A common LFO is great for Phaser like modulation of the sound when playing chords|
-|5|Combination of LFOs| Vibrations... vibrations...|
-|6|Velocity modulated Decay|Expressive|
-|7|Random S&H|Let robots have a talk!|
+| Value | Description                | Note                                                                              |
+|----|----------------------------|-----------------------------------------------------------------------------------|
+| `0` | Decay                      | The most used mode                                                                |
+| `1` | Note triggered LFO         | starts like the decay and then goes back in the other direction...                |
+| `2` | Decay + Note triggered LFO | Useful to have the sound still "alive" after the decay                            |
+| `3` | Decay + fast LFO           |                                                                                   |
+| `4` | Common LFO                 | A common LFO is great for Phaser like modulation of the sound when playing chords |
+| `5` | Combination of LFOs        | Vibrations... vibrations...                                                       |
+| `6` | Velocity modulated Decay   | Expressive                                                                        |
+| `7` | Random S&H                 | Let robots have a talk!                                                           |
+
+## Morpheme list
+| Group                         | N | Description | N | Description | N | Description   | N | Description    |
+|-------------------------------|---|-------------|---|-------------|---|---------------|---|----------------|
+| Saw: Basic waves              | 0 | Tri simple  | 1 | Tri octave  | 2 | Saw simple    | 3 | Saw octave     |
+| Str: Basic with chorus        | 0 | Tri vibrato | 1 | Tri Chorus  | 2 | Str chorus    | 3 | Fat Str chorus |
+| Sync: For sync sweeps         | 0 | Tri 3oct up | 1 | Saw up det  | 2 | Saw up detune | 3 | Saw up Chorus  |
+| Plk: for plucked FMish sounds | 0 | Pluck       | 1 | Plk vib Ch  | 2 | Plk vib Ch    | 3 | Plk vib Ch     |
+| DXW: FM and phase dist        | 0 |             | 1 |             | 2 |               | 3 |                |
+| Toy: Noisy stuff              | 0 |             | 1 |             | 2 |               | 3 |                |
+| Grg: Formantic                | 0 | Formant A   | 1 | Formant OO  | 2 | Ethnic 1      | 3 | Ethnic 2       |
+| End: Low level noisy          | 0 | Noise Low   | 1 | Noise High  | 2 | Chaotic 1     | 3 | Chaotic 2      |
+
+On the APC25 the pads column corresponds to the group and the color corresponds to the variant 
+(0:green 1:yellow 2:red 3:cyan)
 
 ## Using an APC Key25 MkII for direct sound design
 
