@@ -39,7 +39,7 @@ Updates :
 - support for Pitch Bend (+- 2 semitones)
 - if an APC25Key II is attached the presets can be accessed through "shift+pad"
 
-A short demo of these fm oriented presets: ![soundcloud example](https://soundcloud.com/thierry-rochebois/fm-sounds-from-the-thierryrochebois-i-alpha-001)
+A short demo of these fm oriented presets: ![soundcloud preset demo 001](https://soundcloud.com/thierry-rochebois/fm-sounds-from-the-thierryrochebois-i-alpha-001)
 
 ### Thierry-Rochebois-I-alpha000
 It is my first GitHub publication for almost 5 years (I was pretty active with the Axoloti then). I discovered the
@@ -49,7 +49,7 @@ They are based on a recreation of classic waveforms and hardsync.
 
 I will add more details about the hardware options and the various Midi controls this week end.
 
-A short demo of these presets: https://soundcloud.com/thierry-rochebois/testthierryrocheboisialpha000 
+A short demo of these presets: ![soundcloud preset demo 000](https://soundcloud.com/thierry-rochebois/testthierryrocheboisialpha000) 
 
 ----------------------------------------------------------------------------
 ## Configurations
