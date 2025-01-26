@@ -31,6 +31,14 @@ with existing products.
 
 ----------------------------------------------------------------------------
 ## Versions
+
+### Thierry-Rochebois-I-alpha002
+
+Added support for the [Teensy Audio Adaptor Board](https://www.pjrc.com/store/teensy3_audio.html).
+-> Added I2C controls to enable it and set volume gain to 1. (which is not the case with previous
+versions)
+
+
 ### Thierry-Rochebois-I-alpha001
 Updates :
 - 8 new presets
