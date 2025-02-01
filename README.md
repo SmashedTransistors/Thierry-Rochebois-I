@@ -208,16 +208,16 @@ With Morph Mod Depth `CC18` part of the morphing will be controlled by the Morph
 
 Values used for CC `78`, `79`, `75` and `76`.
 
-| Group                                                       | CC value | Description | CC value | Description | CC value | Description   | CC value | Description    |
-|-------------------------------------------------------------|----------|-------------|----------|-------------|----------|---------------|----------|----------------|
-| Saw<br/>Basic waves<br/>If you are into virtual analog        | 0        | Tri simple  | 1        | Tri octave  | 2        | Saw simple    | 3        | Saw octave     |
-| Str<br/>Basic with chorus                                     | 4        | Tri vibrato | 5        | Tri Chorus  | 6        | Str chorus    | 7        | Fat Str chorus |
-| Syn:<br/>For sync sweeps                                      | 8        | Tri 3oct up | 9        | Saw up det  | 10       | Saw up detune | 11       | Saw up Chorus  |
-| Plk<br/>for plucked FMish sounds                              | 12       | Pluck       | 13       | Plk vib Ch  | 14       | Plk vib Ch    | 15       | Plk vib Ch     |
-| DXW<br/>FM and phase distorsion                               | 16       |             | 17       |             | 18       |               | 19       |                |
-| Toy<br/>Noisy stuff<br/>Nice for Fx and Sci Fi stuff          | 20       |             | 21       |             | 22       |               | 23       |                |
-| Grg<br/>Formantic...<br/>because everybody needs twangy sounds sometimes | 24       | Formant A   | 25       | Formant OO  | 26       | Ethnic 1      | 27       | Ethnic 2       |
-| End<br/>Low level noisy<br/>useful for attacks or end of sounds | 28       | Noise Low   | 29       | Noise High  | 30       | Chaotic 1     | 31       | Chaotic 2      |
+| Group                                                       | CC value | Description       | CC value | Description      | CC value | Description   | CC value | Description    |
+|-------------------------------------------------------------|----------|-------------------|----------|------------------|----------|---------------|----------|----------------|
+| Saw<br/>Basic waves<br/>If you are into virtual analog       | 0        | Base              | 1        | Base octave      | 2        | Saw           | 3        | Saw octave     |
+| Str<br/>Basic with chorus                                    | 4        | Base with vibrato | 5        | Base with Chorus | 6        | Str chorus    | 7        | Fat Str chorus |
+| Syn<br/>For sync sweeps                                      | 8        | Base 3oct up      | 9        | Saw up det       | 10       | Saw up detune | 11       | Saw up Chorus  |
+| Plk<br/>for plucked FMish sounds                             | 12       | Pluck             | 13       | Plk vib Ch       | 14       | Plk vib Ch    | 15       | Plk vib Ch     |
+| DXW<br/>FM and phase distorsion                              | 16       |                   | 17       |                  | 18       |               | 19       |                |
+| Toy<br/>Noisy stuff<br/>Nice for Fx and Sci Fi stuff         | 20       |                   | 21       |                  | 22       |               | 23       |                |
+| Grg<br/>Formantic...<br/>because everybody needs twangy sounds sometimes | 24       | Formant A         | 25       | Formant OO       | 26       | Ethnic 1      | 27       | Ethnic 2       |
+| End<br/>Low level noisy<br/>useful for attacks or end of sounds | 28       | Noise Low         | 29       | Noise High       | 30       | Chaotic 1     | 31       | Chaotic 2      |
 
 On the APC25 the pads column corresponds to the group and the color corresponds to the variant 
 (0:green 1:yellow 2:red 3:cyan)
