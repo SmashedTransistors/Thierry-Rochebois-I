@@ -11,7 +11,7 @@ https://studio.youtube.com/video/8HZv_8R1IUs
 ## Features
 
 - 8 voice polyphony
-- core synth engine based on dual hard synched phase modulation with multiple feedbacks, detunes and chaotic generators (the "morphemes" take care of that) and a two pole resonant low pass filter.
+- core synth engine based on dual hard synched phase modulation (2x3 operators) with multiple feedbacks, detunes and chaotic generators (the "morphemes" take care of that) and a two pole resonant low pass filter.
 - 96kHz sample rate (for a brighter sound and controlled aliasing)
 - Morphing based synthesis 
 - 32 "morphemes"
@@ -30,7 +30,7 @@ _Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
 
 ## TR-I (Thierry-Rochebois-I)
 
-Yes, it's my real name. It can seem weird to name a synth after myself... but that's an easy way to avoid
+It can seem weird to name a synth after myself... but that's an easy way to avoid
 troubles with trademarks. I had many funny names in mind but most of them would have been a cause of conflict
 with existing products.
 
@@ -205,16 +205,19 @@ With Morph Mod Depth `CC18` part of the morphing will be controlled by the Morph
 | `7` | Random S&H                 | Let robots have a talk!                                                           |
 
 ## Morpheme list
-| Group                         | N | Description | N | Description | N | Description   | N | Description    |
-|-------------------------------|---|-------------|---|-------------|---|---------------|---|----------------|
-| Saw: Basic waves              | 0 | Tri simple  | 1 | Tri octave  | 2 | Saw simple    | 3 | Saw octave     |
-| Str: Basic with chorus        | 0 | Tri vibrato | 1 | Tri Chorus  | 2 | Str chorus    | 3 | Fat Str chorus |
-| Sync: For sync sweeps         | 0 | Tri 3oct up | 1 | Saw up det  | 2 | Saw up detune | 3 | Saw up Chorus  |
-| Plk: for plucked FMish sounds | 0 | Pluck       | 1 | Plk vib Ch  | 2 | Plk vib Ch    | 3 | Plk vib Ch     |
-| DXW: FM and phase dist        | 0 |             | 1 |             | 2 |               | 3 |                |
-| Toy: Noisy stuff              | 0 |             | 1 |             | 2 |               | 3 |                |
-| Grg: Formantic                | 0 | Formant A   | 1 | Formant OO  | 2 | Ethnic 1      | 3 | Ethnic 2       |
-| End: Low level noisy          | 0 | Noise Low   | 1 | Noise High  | 2 | Chaotic 1     | 3 | Chaotic 2      |
+
+Values used for CC `78`, `79`, `75` and `76`.
+
+| Group                                                       | CC value | Description | CC value | Description | CC value | Description   | CC value | Description    |
+|-------------------------------------------------------------|----------|-------------|----------|-------------|----------|---------------|----------|----------------|
+| Saw<br/>Basic waves<br/>If you are into virtual analog        | 0        | Tri simple  | 1        | Tri octave  | 2        | Saw simple    | 3        | Saw octave     |
+| Str<br/>Basic with chorus                                     | 4        | Tri vibrato | 5        | Tri Chorus  | 6        | Str chorus    | 7        | Fat Str chorus |
+| Syn:<br/>For sync sweeps                                      | 8        | Tri 3oct up | 9        | Saw up det  | 10       | Saw up detune | 11       | Saw up Chorus  |
+| Plk<br/>for plucked FMish sounds                              | 12       | Pluck       | 13       | Plk vib Ch  | 14       | Plk vib Ch    | 15       | Plk vib Ch     |
+| DXW<br/>FM and phase distorsion                               | 16       |             | 17       |             | 18       |               | 19       |                |
+| Toy<br/>Noisy stuff<br/>Nice for Fx and Sci Fi stuff          | 20       |             | 21       |             | 22       |               | 23       |                |
+| Grg<br/>Formantic...<br/>because everybody needs twangy sounds sometimes | 24       | Formant A   | 25       | Formant OO  | 26       | Ethnic 1      | 27       | Ethnic 2       |
+| End<br/>Low level noisy<br/>useful for attacks or end of sounds | 28       | Noise Low   | 29       | Noise High  | 30       | Chaotic 1     | 31       | Chaotic 2      |
 
 On the APC25 the pads column corresponds to the group and the color corresponds to the variant 
 (0:green 1:yellow 2:red 3:cyan)
