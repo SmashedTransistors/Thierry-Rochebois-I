@@ -1,17 +1,17 @@
 ![Human created No AI used](./pictures/HumanCreated.png)
-# Thierry-Rochebois-I
+# TR-I
 Teensy4.1 based Transdimensional Morphing Synthesizer number one.
 
 **You only need a Teensy4.1 and a I2S audio DAC to try it.**
 
-## Transdimensional ?
-_Transdimensional_ is a fancy name for a way to simplify the use of very complicated synthesis algorithm.
-It is a kind of morphing that takes care of navigating through the synthesis parameter hyperspace.
-_Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
+**Add a SH1106 OLED a USB Host adapter and you can use an Akai APC25Key Mark II for direct control**
+https://studio.youtube.com/video/8HZv_8R1IUs/edit
+
 
 ## Features
 
 - 8 voice polyphony
+- core synth engine based on dual hard synched phase modulation with multiple feedbacks, detunes and chaotic generators (the "morphemes" take care of that) and a two pole resonant low pass filter.
 - 96kHz sample rate (for a brighter sound and controlled aliasing)
 - Morphing based synthesis 
 - 32 "morphemes"
@@ -20,10 +20,15 @@ _Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
 - Reverberation
 - Chorus
 - CC control of synthesis parameters
-- Presets through Midi Program Changes ( 15 presets already available on version alpha001).
+- Presets through Midi Program Changes (20 presets available on version alpha003).
+
+## Transdimensional ?
+_Transdimensional_ is a fancy name for a way to simplify the use of very complicated synthesis algorithm.
+It is a kind of morphing that takes care of navigating through the synthesis parameter hyperspace.
+_Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
 
 
-## Thierry-Rochebois-I
+## TR-I (Thierry-Rochebois-I)
 
 Yes, it's my real name. It can seem weird to name a synth after myself... but that's an easy way to avoid
 troubles with trademarks. I had many funny names in mind but most of them would have been a cause of conflict
@@ -31,6 +36,10 @@ with existing products.
 
 ----------------------------------------------------------------------------
 ## Versions
+
+### Thierry-Rochebois-I-alpha003
+
+Bug fixes and 6 more presets
 
 ### Thierry-Rochebois-I-alpha002
 
@@ -142,43 +151,43 @@ The optional SCK must be grounded by adding a solder blob.
                          32              33
 ```
 ![PCM5102A Breaout](./photos/PCM5102A_Breakout.jpg)
-----------------------------------------------------------------------------
 
+----------------------------------------------------------------------------
 ## Presets (alpha001)
-| PC | Preset            | PC | Preset  |
-|----|-------------------|----|---------|
-| `0` | bass              | `8` | clav1   |
-| `1` | china             | `9` | clav2   |
-| `2` | chordéon (wheel)  | `10` | FM Bass |
-| `3` | west (wheel)      | `11` | space   |
-| `4` | sync (wheel)      | `12` | harsh1  |
-| `5` | sync harp(wheel)  | `13` | haunted |
-| `6` | sync dream(wheel) | `14` | Baroque |
-| `7` | phaser(wheel)     | `15` |         |
+| PC  | Preset            | PC    | Preset  | PC   | Preset           |
+|-----|-------------------|-------|---------|------|------------------|
+| `0` | bass              | `8`   | clav1   | `16` | Horror Pad       |
+| `1` | china             | `9`   | clav2   | `17` | Horror Vox       |
+| `2` | chordéon (wheel)  | `10`  | FM Bass | `18` | Crazy Robot      |
+| `3` | west (wheel)      | `11`  | space   | `19` | Dry Slap         |
+| `4` | sync (wheel)      | `12`  | harsh1  | `20` | Forbidden Planet |
+| `5` | sync harp(wheel)  | `13`  | haunted | `21` |                  |
+| `6` | sync dream(wheel) | `14`  | Baroque | `22` |                  |
+| `7` | phaser(wheel)     | `15`  | Horror  | `23` |                  |
 
 
 
 ## CC
 
-|  CC  | Description        | CC Values | Notes                                                                   |
-|------|--------------------|-----------|-------------------------------------------------------------------------|
-|   `7`| Volume             | 0..127    |                                                                         |
-|  `91`| Reverb             | 0..7      |                                                                         |
-|  `93`| Chorus Type        | 0..3      |                                                                         |
-|  `74`| Filter Cutoff      | 0..127    |                                                                         |
-|  `73`| Filter Mod         | 0..127    | scales to -64..63 semitones                                             |
-|  `72`| Filter Decay time  | 0..127    |                                                                         |
-|  `71`| Filter Resonance   | 0..5      |                                                                         |
-|  `16`| Volume enveloppe   | 0..127    | 0 Gate -> 40 longer release -> 64 smooth AR -> Brass                    |
-|   `1`| ModWheel = MORPH   | 0..127    | The Morph parameter                                                     |
-|  `18`| Morph Mod Depth    | 0..127    | if 127 the modulation takes full control and the modwheel has no effect |
-|  `19`| Morph Mod Rate     | 0..127    | The rate of mod modulation                                              |
-|  `77`| Morph Function     | 0..7      | The morph modulator type... LFOs or enveloppes... see table below       |
-|  `78`| A1 Morpheme 1      | 0..31     | all available on alpha001                                               |
-|  `79`| B1 Morpheme 1      | 0..32     | all available on alpha001                                               |
-|  `75`| A0 Morpheme 1      | 0..31     | all available on alpha001                                               |
-|  `76`| B0 Morpheme 1      | 0..32     | all available on alpha001                                               |
-|  `94`| Wave symetry ratio | 0..7      | 0..3 triangle based 4..7 sine based                                     |
+|  CC  | Description        | CC Values | Notes                                                                                    |
+|------|--------------------|-----------|------------------------------------------------------------------------------------------|
+|   `7`| Volume             | 0..127    |                                                                                          |
+|  `91`| Reverb             | 0..7      |                                                                                          |
+|  `93`| Chorus Type        | 0..3      |                                                                                          |
+|  `74`| Filter Cutoff      | 0..127    |                                                                                          |
+|  `73`| Filter Mod         | 0..127    | scales to -64..63 semitones                                                              |
+|  `72`| Filter Decay time  | 0..127    |                                                                                          |
+|  `71`| Filter Resonance   | 0..5      |                                                                                          |
+|  `16`| Volume enveloppe   | 0..127    | 0 Gate -> 40 longer release -> 64 smooth AR -> 127 Brass                                 |
+|   `1`| ModWheel = MORPH   | 0..127    | The Morph parameter                                                                      |
+|  `18`| Morph Mod Depth    | 0..127    | if 127 the modulation takes full control and the modwheel has no effect                  |
+|  `19`| Morph Mod Rate     | 0..127    | The rate of mod modulation                                                               |
+|  `77`| Morph Function     | 0..7      | The morph modulator type... LFOs or enveloppes... see table below                        |
+|  `78`| A1 Morpheme 1      | 0..31     | all available since alpha001                                                             |
+|  `79`| B1 Morpheme 1      | 0..32     | all available since alpha001                                                             |
+|  `75`| A0 Morpheme 1      | 0..31     | all available since alpha001                                                             |
+|  `76`| B0 Morpheme 1      | 0..32     | all available since alpha001                                                             |
+|  `94`| Wave symetry ratio | 0..7      | 0..3 triangle based <br/>4..7 sine based<br/>T1/2 T1/3 T1/4 T.49<br/>S1/2 S1/3 S1/4 S.49 |
 
 ## Morph Function
 Without morph modulation, the morphing from [A0,B0] to [A1,B1] is controlled by the modwheel.
