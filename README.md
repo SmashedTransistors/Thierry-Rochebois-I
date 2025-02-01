@@ -5,7 +5,7 @@ Teensy4.1 based Transdimensional Morphing Synthesizer number one.
 **You only need a Teensy4.1 and a I2S audio DAC to try it.**
 
 **Add a SH1106 OLED a USB Host adapter and you can use an Akai APC25Key Mark II for direct control**
-https://studio.youtube.com/video/8HZv_8R1IUs/edit
+https://studio.youtube.com/video/8HZv_8R1IUs
 
 
 ## Features
