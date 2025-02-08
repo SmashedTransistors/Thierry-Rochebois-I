@@ -1,26 +1,35 @@
 ![Human created No AI used](./pictures/HumanCreated.png)
-# TR-I
+# TR-I Morphing Synthesizer
 Teensy4.1 based Transdimensional Morphing Synthesizer number one.
 
 **You only need a Teensy4.1 and a I2S audio DAC to try it.**
 
-**Add a SH1106 OLED a USB Host adapter and you can use an Akai APC25Key Mark II for direct control**
+**Add a SH1106 OLED and a USB Host adapter and you can use an Akai APC25Key Mark II for direct control**
+
+
 https://studio.youtube.com/video/8HZv_8R1IUs
 
 
 ## Features
 
+- Morphing based synthesis
 - 8 voice polyphony
-- core synth engine based on dual hard synched phase modulation (2x3 operators) with multiple feedbacks, detunes and chaotic generators (the "morphemes" take care of that) and a two pole resonant low pass filter.
-- 96kHz sample rate (for a brighter sound and controlled aliasing)
-- Morphing based synthesis 
 - 32 "morphemes"
   - a starting point consists of a pair of morphemes
   - the ending point consists of another pair of morphemes
+- core synth engine based on dual hard synched phase modulation (2x3 operators) with multiple feedbacks, detunes and chaotic generators (the "morphemes" take care of that) and a two pole resonant low pass filter.
+- 96kHz sample rate (for a brighter sound and controlled aliasing)
+- Optional balanced output mode (using two I2S dacs) for better quality
 - Reverberation
 - Chorus
 - CC control of synthesis parameters
 - Presets through Midi Program Changes (20 presets available on version alpha003).
+- Possible direct control of the synthesis engine with an [Akai APC key 25 mk2](https://www.akaipro.com/apc-key-25-mkii.html)
+- Display on a 1"33 SH1106 OLED (scope and parameters)
+- MIDI sources:
+  - USB device port (computer)
+  - USB Host (from a Akai APC key 25 mk2)
+  - MIDI Din (H11L1 optocoupler on RX1)
 
 ## Transdimensional ?
 _Transdimensional_ is a fancy name for a way to simplify the use of very complicated synthesis algorithm.
@@ -30,56 +39,25 @@ _Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
 
 ## TR-I (Thierry-Rochebois-I)
 
-It can seem weird to name a synth after myself... but that's an easy way to avoid
-troubles with trademarks. I had many funny names in mind but most of them would have been a cause of conflict
+I had many funny names in mind but most of them would have been a cause of conflict
 with existing products.
+Feels weird to name a synth after myself... but that's the easy way to avoid
+troubles with trademarks. 
 
 ----------------------------------------------------------------------------
 ## Versions
 
-### Thierry-Rochebois-I-alpha004
+The project is still in its alpha stages (that means that some implementations can
+evolve).
+[Here is the info about the occuring alpha versions](./Versions.md)
 
-Added support for balanced outputs mode using two I2S DACs.
-In this mode, each DAC acts like a mono balanced output 
-(one dac for the left, one dac for the right).
-
-This mode is activated by grounding GPIO 2.
-
-Default mode is the usual stereo output
-
-### Thierry-Rochebois-I-alpha003
-
-Bug fixes and 6 more presets
-
-### Thierry-Rochebois-I-alpha002
-
-Added support for the [Teensy Audio Adaptor Board](https://www.pjrc.com/store/teensy3_audio.html).
--> Added I2C controls to enable it and set volume gain to 1. (which is not the case with previous
-versions)
-
-
-### Thierry-Rochebois-I-alpha001
-Updates :
-- 8 new presets
-- all 32 "morphemes" are now implemented
-- Triangle or Sine based engine (so that analogish and FMish sounds are possible)
-- support for Pitch Bend (+- 2 semitones)
-- if an APC25Key II is attached the presets can be accessed through "shift+pad"
-
-A short demo of these fm oriented presets: https://youtu.be/qpshYl_NxRQ
-
-### Thierry-Rochebois-I-alpha000
-It is my first GitHub publication for almost 5 years (I was pretty active with the Axoloti then). I discovered the
-Teensy4.1 a year ago.
-With alpha000 you already have 7 presets available (through midi program changes). 
-They are based on a recreation of classic waveforms and hardsync.
-
-I will add more details about the hardware options and the various Midi controls this week end.
-
-A short demo of these presets: ![soundcloud preset demo 000](https://soundcloud.com/thierry-rochebois/testthierryrocheboisialpha000) 
 
 ----------------------------------------------------------------------------
 ## Configurations
+
+I designed this project so that you can test it with a very small configuration
+and add what you want.
+
 ### Base
 **You only need a Teensy4.1 and a I2S audio DAC to try it...** 
 
@@ -88,7 +66,7 @@ and if you like it you can add some goodies if you want to go further.
 - OLED SH1106 (for oscilloscope and parameter display) 
 - Midi Din (on RX1)
 - Akai APC25 Mk2 on USBHost for direct sound editing.
-- Secondary I2S audio DAC for higher quality balanced outputs (since alpha004).
+- Secondary I2S audio DAC for higher quality balanced outputs.
 
 ![All Options](./photos/AllOptions.jpg)
 ![All Options](./photos/APCkey25MkII.jpg)
@@ -162,8 +140,33 @@ The optional SCK must be grounded by adding a solder blob.
 ```
 ![PCM5102A Breaout](./photos/PCM5102A_Breakout.jpg)
 
+### Installing a secondary I2S DAC for balanced outputs
+
+Connect the secondary I2S like the primary but replace OU1A (7) by OUT1B (32) as an input to the DAC.
+
+### MIDI Din input on RX1
+Using a H11L1 optocoupler.
+The H11L1 is a fast, reliable and easily available optocoupler.
+So a 4k7 pull up resistor is good enough for Midi baud rates.
+(Low values can even cause unwanted glitches on the 3V3 rail because of the H11L1 sharp transients).
+
+```
+MIDI DIN                               H11L1                         TEENSY
+
+PIN 4  ----|220 Ohms|----+--------|1           6|------+------------+-- 3V3
+                        ---       |             |      |            |
+              1N4148    / \       |             |    ===== 100nF    |
+                         |        |             |      |           | |
+PIN 5  ------------------+--------|2           5|------+-- GND     | | 
+                                  |             |              4k7 | |
+                                  |             |                   |
+                                  |             |                   |
+                                  |3           4|-------------------+-- RX1
+```
+
+
 ----------------------------------------------------------------------------
-## Presets (alpha001)
+## Presets
 | PC  | Preset            | PC    | Preset  | PC   | Preset           |
 |-----|-------------------|-------|---------|------|------------------|
 | `0` | bass              | `8`   | clav1   | `16` | Horror Pad       |
@@ -220,12 +223,12 @@ Values used for CC `78`, `79`, `75` and `76`.
 
 | Group                                                       | CC value | Description       | CC value | Description      | CC value | Description   | CC value | Description    |
 |-------------------------------------------------------------|----------|-------------------|----------|------------------|----------|---------------|----------|----------------|
-| Saw<br/>Basic waves<br/>If you are into virtual analog       | 0        | Base              | 1        | Base octave      | 2        | Saw           | 3        | Saw octave     |
-| Str<br/>Basic with chorus                                    | 4        | Base with vibrato | 5        | Base with Chorus | 6        | Str chorus    | 7        | Fat Str chorus |
-| Syn<br/>For sync sweeps                                      | 8        | Base 3oct up      | 9        | Saw up det       | 10       | Saw up detune | 11       | Saw up Chorus  |
-| Plk<br/>for plucked FMish sounds                             | 12       | Pluck             | 13       | Plk vib Ch       | 14       | Plk vib Ch    | 15       | Plk vib Ch     |
-| DXW<br/>FM and phase distorsion                              | 16       |                   | 17       |                  | 18       |               | 19       |                |
-| Toy<br/>Noisy stuff<br/>Nice for Fx and Sci Fi stuff         | 20       |                   | 21       |                  | 22       |               | 23       |                |
+| Saw<br/>Basic waves<br/>If you are into virtual analog      | 0        | Base              | 1        | Base octave      | 2        | Saw           | 3        | Saw octave     |
+| Str<br/>Basic with chorus                                   | 4        | Base with vibrato | 5        | Base with Chorus | 6        | Str chorus    | 7        | Fat Str chorus |
+| Syn<br/>For sync sweeps                                     | 8        | Base 3oct up      | 9        | Saw up det       | 10       | Saw up detune | 11       | Saw up Chorus  |
+| Plk<br/>for plucked FMish sounds                            | 12       | Pluck             | 13       | Plk vib Ch       | 14       | Plk vib Ch    | 15       | Plk vib Ch     |
+| DXW<br/>FM and phase distorsion                             | 16       |                   | 17       |                  | 18       |               | 19       |                |
+| Toy<br/>Noisy stuff<br/>Nice for Fx and Sci Fi stuff        | 20       |                   | 21       |                  | 22       |               | 23       |                |
 | Grg<br/>Formantic...<br/>because everybody needs twangy sounds sometimes | 24       | Formant A         | 25       | Formant OO       | 26       | Ethnic 1      | 27       | Ethnic 2       |
 | End<br/>Low level noisy<br/>useful for attacks or end of sounds | 28       | Noise Low         | 29       | Noise High       | 30       | Chaotic 1     | 31       | Chaotic 2      |
 
