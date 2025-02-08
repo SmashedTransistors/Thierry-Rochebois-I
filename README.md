@@ -7,8 +7,9 @@ Teensy4.1 based Transdimensional Morphing Synthesizer number one.
 **Add a SH1106 OLED and a USB Host adapter and you can use an Akai APC25Key Mark II for direct control**
 
 
-https://studio.youtube.com/video/8HZv_8R1IUs
+https://youtu.be/8HZv_8R1IUs
 
+https://youtu.be/qpshYl_NxRQ
 
 ## Features
 
