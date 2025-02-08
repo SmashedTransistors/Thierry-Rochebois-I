@@ -37,6 +37,16 @@ with existing products.
 ----------------------------------------------------------------------------
 ## Versions
 
+### Thierry-Rochebois-I-alpha004
+
+Added support for balanced outputs mode using two I2S DACs.
+In this mode, each DAC acts like a mono balanced output 
+(one dac for the left, one dac for the right).
+
+This mode is activated by grounding GPIO 2.
+
+Default mode is the usual stereo output
+
 ### Thierry-Rochebois-I-alpha003
 
 Bug fixes and 6 more presets
@@ -78,7 +88,7 @@ and if you like it you can add some goodies if you want to go further.
 - OLED SH1106 (for oscilloscope and parameter display) 
 - Midi Din (on RX1)
 - Akai APC25 Mk2 on USBHost for direct sound editing.
-- Secondary I2S audio DAC for symetrical outputs.
+- Secondary I2S audio DAC for higher quality balanced outputs (since alpha004).
 
 ![All Options](./photos/AllOptions.jpg)
 ![All Options](./photos/APCkey25MkII.jpg)
