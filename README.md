@@ -32,6 +32,8 @@ https://youtu.be/qpshYl_NxRQ
   - USB Host (from a Akai APC key 25 mk2)
   - MIDI Din (H11L1 optocoupler on RX1)
 
+[**---> Little video tutorials here <---**](https://www.youtube.com/watch?v=_vbfbmH16PU&list=PLi62YXvdJFO0XG5JfScvJ0Ga7yxIYp9uY)
+
 ## Transdimensional ?
 _Transdimensional_ is a fancy name for a way to simplify the use of very complicated synthesis algorithm.
 It is a kind of morphing that takes care of navigating through the synthesis parameter hyperspace.
