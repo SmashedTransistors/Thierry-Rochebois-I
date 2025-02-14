@@ -26,7 +26,7 @@ https://youtu.be/qpshYl_NxRQ
 - CC control of synthesis parameters
 - Presets through Midi Program Changes (20 presets available on version alpha003).
 - Possible direct control of the synthesis engine with an [Akai APC key 25 mk2](https://www.akaipro.com/apc-key-25-mkii.html)
-- Display on a 1"33 SH1106 OLED (scope and parameters)
+- Display on a 1"33 SH1106 or 2"42 SSD1309 OLED (scope and parameters)
 - MIDI sources:
   - USB device port (computer)
   - USB Host (from a Akai APC key 25 mk2)

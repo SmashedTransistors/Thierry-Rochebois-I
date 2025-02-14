@@ -1,8 +1,19 @@
 ![Human created No AI used](./pictures/HumanCreated.png)
 
+![Big OLED](./photos/SSD1309_params.jpg)
 
 ----------------------------------------------------------------------------
 ## Versions
+
+
+
+### Thierry-Rochebois-I-alpha005
+
+Added support for "big" 2"42 I2C SSD1309 OLEDS
+
+This mode is activated by grounding GPIO 3.
+
+
 
 ### Thierry-Rochebois-I-alpha004
 
