@@ -170,16 +170,16 @@ PIN 5  ------------------+--------|2           5|------+-- GND     | |
 
 ----------------------------------------------------------------------------
 ## Presets
-| PC  | Preset            | PC    | Preset  | PC   | Preset           |
-|-----|-------------------|-------|---------|------|------------------|
-| `0` | bass              | `8`   | clav1   | `16` | Horror Pad       |
-| `1` | china             | `9`   | clav2   | `17` | Horror Vox       |
-| `2` | chordéon (wheel)  | `10`  | FM Bass | `18` | Crazy Robot      |
-| `3` | west (wheel)      | `11`  | space   | `19` | Dry Slap         |
-| `4` | sync (wheel)      | `12`  | harsh1  | `20` | Forbidden Planet |
-| `5` | sync harp(wheel)  | `13`  | haunted | `21` |                  |
-| `6` | sync dream(wheel) | `14`  | Baroque | `22` |                  |
-| `7` | phaser(wheel)     | `15`  | Horror  | `23` |                  |
+| PC  | Preset            | PC    | Preset  | PC   | Preset           | PC   | Preset  |
+|-----|-------------------|-------|---------|------|------------------|------|---------|
+| `0` | bass              | `8`   | clav1   | `16` | Horror Pad       | `24` | 1988    |   
+| `1` | china             | `9`   | clav2   | `17` | Horror Vox       | `25` | evening |
+| `2` | chordéon (wheel)  | `10`  | FM Bass | `18` | Crazy Robot      | `26` | SF      |
+| `3` | west (wheel)      | `11`  | space   | `19` | Dry Slap         | `27` | Basic   |
+| `4` | sync (wheel)      | `12`  | harsh1  | `20` | Forbidden Planet | `28` | Basic   |
+| `5` | sync harp(wheel)  | `13`  | haunted | `21` | Nice Noise       | `29` | Basic   |
+| `6` | sync dream(wheel) | `14`  | Baroque | `22` | Broken           | `30` | Basic   |
+| `7` | phaser(wheel)     | `15`  | Horror  | `23` | Solino           | `31` | Basic   |
 
 
 

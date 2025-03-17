@@ -6,6 +6,11 @@
 ## Versions
 
 
+### Thierry-Rochebois-I-alpha006
+
+A few more presets.
+Anti zip noise filter on wheel modulation.
+
 
 ### Thierry-Rochebois-I-alpha005
 
