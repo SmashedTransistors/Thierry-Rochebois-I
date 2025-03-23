@@ -5,6 +5,10 @@
 ----------------------------------------------------------------------------
 ## Versions
 
+### Thierry-Rochebois-I-alpha007
+
+A few more presets.
+Better display stability of the oscilloscope
 
 ### Thierry-Rochebois-I-alpha006
 
