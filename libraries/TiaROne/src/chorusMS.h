@@ -18,7 +18,8 @@ class ChorusMS
 	public:
   
 
-	//variables d'état
+	//state variables
+  // a nice stereo chorus
   float *v;
   int pos=0;
   

@@ -13,6 +13,8 @@ T.Rochebois
 */
 namespace tiarone
 {
+// an efficient noise shaper to get the maximum from low cost I2S DACs
+// even if using 16 bit mode.  
 class NoiseShaper{
 	public:
   float dc=0;
@@ -21,29 +23,26 @@ class NoiseShaper{
   int16_t s=1;
   
   int16_t quands(float x) {
-    // suppression de la composante continue
+    // DC remove
     dc+=0.00261f*(x-dc);
     x-=dc;
     // saturation [-1 +1]
     if(x>1) x=1;
     else if(x<-1) x=-1;
-    //géné pseudo aléatoire
+    //pseudo random generator
     rnd=rnd*69069+1;
-    // échelle 16 bits
+    // 16bit scaling
 		float v=x*32760;
-    // prise en compte de l'erreur faite précédemment
-    // très léger dither aléatoire (évite les patterns
-    // répétitifs)
+    // error feedback + slight random dithering
+    // to avoid repetitive patterns
     float vFbDither = v - e + 0.06f*q_to_float(rnd,32);
     int16_t iv=float_to_s16(vFbDither,0);
-    // garde fou contre le détecteur de silence des
-    // PCM5102 (clics)
+    // safe guard against clicky silence detectors when using PCM5102
     if(iv==0) {
       iv=s;
       s=-s;
     }
-    // erreur par rapport à la valeur voulue
-    // prise en compte à la prochaine itération
+    // error used for feedback dithering
     e=iv-v;
     return iv;
 	}	

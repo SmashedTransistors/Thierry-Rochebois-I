@@ -13,7 +13,71 @@ T.Rochebois
 */
 namespace tiarone
 {
-class BSVF3B{  //hybride avec fuite
+class BSVF3B{
+  //Discretized "Zero" Delay State Variable Filter
+  /*
+  From my explanation on the Reaper Forum
+  https://forum.cockos.com/showpost.php?p=1574927&postcount=11
+  
+  
+  The starting point is the Chamberlin filter:
+  
+  For every new input sample x, the state variables are updated:
+  
+  n       n-1
+  lp  <-              lp +              F * bp
+  bp  <-  F * x - F * lp + (1 -F*D - F*F) * bp
+  
+  
+  F being related to the normalized frequency and D being a resonance factor (1/2Q).
+
+  Note: As the Chamberlin uses a backward and a forward Euler integrator 
+  it is not stable for all F and D.
+
+  The Chamberlin filter can be decribed as a transition matrix M:
+  
+       x     lp    bp
+   x   1     0     0               constant input
+  lp   0     1     F               bp feeds the lp integrator
+  bp   F    -F     1 - F*D - F*F   double feedback on bp
+  
+  
+  If you use M^k, instead of M^1, it's just like if you iterated the filter k times... 
+  its just like if you upsampled the filter k times with a constant input.
+
+  When you exponentiate M to k=2^i by hand (or with Maxima) 
+  you quickly see that the form of matrix M^k remains
+
+       x     lp    bp
+   x   1     0     0
+  lp   a     1-a   b
+  bp   b     -b    c
+
+  an iteration of the matrix exponentiation can be reduced to:
+
+  i+1      i
+    a <- b^2 + a * (2 - a)
+    b <- b * (1 + c - a)
+    c <- c^2 - b^2
+
+  So it's easy to get M^2^i.
+  
+  With only 7 iterations on coefficients a,b and c, you get M^128.
+  If you use M^128 instead of M you've got the equivalent of a 128x
+  upsampling (with a constant input). You get better bandpass and lowpass
+  filter response and the filter is stable (which is not the case
+  of the Chamberlin filter).
+
+  The audio rate processing is still quite simple:
+  Code:
+
+  n     n-1
+  lp <- a * x + (1 - a) * lp + b * bp;
+  bp <- b * x       - b * lp + c * bp;
+
+  */
+ 
+  
 	public:
 	
 	//variables d'état

@@ -13,6 +13,8 @@ T.Rochebois
 */
 namespace tiarone
 {
+// this is a delay line framework useful for reverb/delay creation
+// used by reverbMS.h
 
 //powers of two only  
 template <int L>
@@ -65,7 +67,7 @@ class TimeLine{
     int p1=calcBufPos(i1);
     float u0=buf[p0];
     float u1=buf[p1];
-    buf[p1]=c*u1+s*u0; //forward positif
+    buf[p1]=c*u1+s*u0; //forward positive
     buf[p0]=c*u0-s*u1;
   }
  	

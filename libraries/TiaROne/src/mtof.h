@@ -13,6 +13,8 @@ T.Rochebois
 */
 namespace tiarone
 {
+//optimised conversion from midi pitch to phase increments  
+  
 const int32_t t_mtof[] = {
 	471913192, 478777328, 485741304, 492806574, 499974611, 
 	507246909, 514624985, 522110378, 529704648, 537409380, 

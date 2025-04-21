@@ -11,6 +11,8 @@ a nice apple pie.
 T.Rochebois
 
 */
+// a big q31 sine table (4097 entries)
+
   int32_t sine2t(int i){
     static int32_t SINE2T[4097]={
 0,3294197,6588386,9882561,13176711,16470831,19764912,23058947,

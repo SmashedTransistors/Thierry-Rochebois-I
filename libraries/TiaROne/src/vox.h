@@ -14,24 +14,26 @@ T.Rochebois
 
 namespace tiarone
 {
+  //A synth voice
+  //
 class Vox
 {
 	public:
-	tiarone::MidiVox midi;
-	Common *common;
-  LFOSine lfo;
-  LFFunc lff;
-  BSVF3B svf;
+	tiarone::MidiVox midi;  // The midi controls that provide pitch and gate information
+	Common *common;         // the pointer to common resources
+  LFOSine lfo;            // the LFO
+  LFFunc lff;             // the low frequency function generator. Acts as an LFO, or S&H or env
+  BSVF3B svf;             // the triple low pass filter
   
   //kstate
   float pitch;
-  Osc osc;
-  float vEnv,fEnv;
-  float rvEnv,chEnv;
-  float gain, gainCh, gainRv;
+  Osc osc;                // The oscillator
+  float vEnv,fEnv;        // volume enveloppe, filter enveloppe
+  float rvEnv,chEnv;      // reverb enveloppe, chorus enveloppe
+  float gain, gainCh, gainRv; // gains
   bool reset;
   int grainType=0;
-  float alpha=0;
+  float alpha=0;          // morph position
   
   float vibRate=5.15f;
   int32_t velocity;
@@ -48,7 +50,8 @@ class Vox
 
 
 
-
+  //init : initialise and interconnects the different modules
+  //       (through pointers and pointers to block buffers)
 	void init(float* tmpBuf, 
   float* accBufOut,
   float* accBufOutCh,

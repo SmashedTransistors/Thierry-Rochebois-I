@@ -112,6 +112,7 @@ class Common
   
   
   //_________________________________________________
+  // The 32 morpheme presets consisting of 27 parameters each
   
   int32_t* getPreset(int i){    
   static int32_t g[32*attr_size]={
@@ -375,10 +376,10 @@ class Common
   float vEnvA=1, vEnvR=0;
   float fEnvR=0.9999f;
   
-  
+  // Manages the pad leds of the Akai APC 25MkII
   tiarone::APC25Display* apcDisplay;
   
-  //TODO définir les LSB
+  //
   void handleCC(byte channel, byte control, byte value){
     Serial.printf("common handleCC, ch=%d control=%d, value=%d\n",channel,control,value);
     int32_t v=(int32_t)value;

@@ -13,6 +13,10 @@ T.Rochebois
 */
 namespace tiarone
 {
+  
+// Receives midi information from the Akai APC Key25 MkII
+// and sends changes to common  
+  
 class APC25Receiver{
 	public:
 
@@ -25,7 +29,7 @@ class APC25Receiver{
     shift=val;
   }
   
-  //Appelé à partir de AkaiOnControlChange
+  //Called from function AkaiOnControlChange in the .ino file
   void handleKnob(byte control, byte value){
     switch(control){
       case 64:
@@ -114,7 +118,7 @@ class APC25Receiver{
     
     
     deduce();
-    //A1 B1 FFC A0 B0 Rev Res et ne pas oublier Chorus, Sym et Display
+    //A1 B1 FFC A0 B0 Rev Res and also Chorus, Sym et Display
     if(note==93){
       common->params2.sym=(common->params2.sym+1)&7;
       common->updateSym(); // pour le display
@@ -139,7 +143,7 @@ class APC25Receiver{
           stateA1++; stateA1%=4;
         } else {
           litPadA1=btn;
-          if(stateB1==4){  //B1 suit A1
+          if(stateB1==4){  //B1 is after A1
             litPadB1=btn;
           }
         }
@@ -152,7 +156,7 @@ class APC25Receiver{
           stateB1++;
           if(btn==litPadA1) stateB1%=5; else stateB1%=4;
                       
-        } else if (stateB1!=4){ //on bouge sauf si on est inv (faut changer d'état pour se dtacher de A1)
+        } else if (stateB1!=4){ //we move excepted if we are in inv mode (white)
           litPadB1=btn;
         }
         if(stateB1==4)

@@ -13,6 +13,10 @@ T.Rochebois
 */
 namespace tiarone
 {
+//used in each voice (vox): receives and translates midi 
+//to voice note, velocity, gate and trig
+// "activity" is used by the midiDispatcher to determine
+// which voice to steal if needed  
 class MidiVox
 {
 	public:

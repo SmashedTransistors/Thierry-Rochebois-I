@@ -13,6 +13,7 @@ T.Rochebois
 */
 namespace tiarone
 {
+// use the pad lights to display information on the AkaiAPC Key25 MkII  
 class APC25Display{
 	public:
   //pads allumés
