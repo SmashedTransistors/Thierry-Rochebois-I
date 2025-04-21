@@ -13,22 +13,26 @@ T.Rochebois
 */
 namespace tiarone
 {
-		template <int N>
-
+template <int N> // N is the number of voices
 class Synth
 {
 	public:
-	tiarone::Common common;
-	tiarone::Vox voxes[N];
-	MidiDispatcher<N> midi;
+  // everything is in static allocated
+  // so that it is in the fastest ram bank in the teensy
+	tiarone::Common common;  // the common resources accessible by all voices
+	tiarone::Vox voxes[N];   // the N voices of the synth
+	MidiDispatcher<N> midi;  // The midi dispatcher that deals with voice stealing
 	
-	//aRate Out
-	float *bOut=nullptr;
-	float *bOutCh=nullptr;
-	float *bOutRv=nullptr;
+  // The audio rate outputs
+  // points to block buffers
+	float *bOut=nullptr;   // the main output
+	float *bOutCh=nullptr; // the chorus send output
+	float *bOutRv=nullptr; // the reverb send output
 
-	void init(float* tmpBuf,
-  float* accBufOut,
+  // Init of the synth => voices and common are initialised
+	void init(
+  float* tmpBuf,       // temporary block buffers that are recycled
+  float* accBufOut,    // fixed block buffers
   float* accBufOutCh,
   float* accBufOutRv
   ){
@@ -40,10 +44,13 @@ class Synth
 			midi.setMidiVox(&(voxes[i].midi),i);
 		}
     common.init();
-
 	}
   
-  
+  // block Processing
+  // it consists in 
+  // - block processing for the common
+  // - clearing the output buffers
+  // - block processing for each voice
 	void bProc(){
 		common.bProc();
 		for(int i=0;i<LCALCBUF;i++){
@@ -55,18 +62,29 @@ class Synth
 			voxes[i].bProc();
 		}
 	}
+  //___________________________________________________________________________
+  // Midi callbacks
+  
+  //notes on and off are handled by the midi dispatcher 
+  //(that will deal with voice stealing)
 	void noteOff(byte channel, byte note, byte velocity){
 		midi.noteOff(channel, note, velocity);
 	}
 	void noteOn(byte channel, byte note, byte velocity){
 		midi.noteOn(channel, note, velocity);
 	}
+  // Control Changes Pitch Bend and Program Changes are
+  // handled by the Common object (that deals with everything
+  // that is common to all voices).
   void handleCC(byte channel, byte control, byte value){
     common.handleCC(channel, control, value);
   }
   void HandlePitchBend(byte channel, int value){
     common.HandlePitchBend(channel, value);
   }
+  
+  // These are static presets. I haven't figured out yet a nice user preset system.
+  // Anyway, a "preset" consists in only 16 parameters transmitted by CC.
   void handleProgramChange(byte channel, byte n){
     static uint8_t patches[40][16]={
     //FCut  FMod FEnv FRes vEnv Mrph MMod MRat  A1 B1 Mfunc A0 B0 SYM REV CH
@@ -129,7 +147,7 @@ class Synth
     handleCC(0, 94, p[13]);//sym
 
     handleCC(0, 91, p[14]);//rev
-  handleCC(0, 93, p[15]);//ch
+    handleCC(0, 93, p[15]);//ch
   }
   
 };
