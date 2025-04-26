@@ -11,7 +11,7 @@ a nice apple pie.
 T.Rochebois
 
 */
-namespace tiarone
+namespace tiar
 {
 // this is a delay line framework useful for reverb/delay creation
 // used by reverbMS.h

@@ -6,6 +6,7 @@
 #include "USBHost_t36.h"
 #define LCALCBUF 32
 #define NBVOX 8
+#include <TiaR.h>
 #include <TiaROne.h>
 #include "Disp1106B.h"
 #include "scope.h"
@@ -18,8 +19,8 @@ KeyboardController keyboard1(myusb);
 KeyboardController keyboard2(myusb);
 MIDIDevice_BigBuffer midi1(myusb);
 
-tiarone::Disp1106B disp;
-tiarone::Scope scope;
+tiar::Disp1106B disp;
+tiar::Scope scope;
 tiarone::APC25Receiver apcReceiver;
 tiarone::APC25Display apcDisplay;
 tiarone::Synth<NBVOX> synth;
@@ -65,7 +66,7 @@ int16_t i16BufL[LCALCBUF];
 int16_t i16BufR[LCALCBUF];
 int16_t i16BufExtL[LCALCBUF];
 int16_t i16BufExtR[LCALCBUF];
-tiarone::NoiseShaper nsL1,nsR1,nsL2,nsR2,nsExtL,nsExtR;
+tiar::NoiseShaper nsL1,nsR1,nsL2,nsR2,nsExtL,nsExtR;
 int32_t rnd=0;
 
 String titre="TIAR - ONE";

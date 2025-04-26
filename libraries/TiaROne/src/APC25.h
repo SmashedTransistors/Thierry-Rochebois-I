@@ -19,7 +19,7 @@ class APC25{
 	int btn[7];
   int state[5];
   MIDIDevice_BigBuffer *midi1;  // pour envoyer des commandes vers l'APC
-  CCReceiver *common;
+  tiar::CCReceiver *common;
   
 	//aRate Ins
   

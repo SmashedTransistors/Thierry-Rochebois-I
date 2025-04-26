@@ -11,7 +11,7 @@ a nice apple pie.
 T.Rochebois
 
 */
-namespace tiarone
+namespace tiar
 {
 class LFOSine{
 	public:

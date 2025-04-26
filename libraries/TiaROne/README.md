@@ -18,11 +18,18 @@ C:\Users\\[user]\AppData\Local\Arduino15\packages\teensy\hardware\avr\1.59.0\cor
 You will also need to install the great library teensy4_i2c from Richard-Gemmell
 https://github.com/Richard-Gemmell/teensy4_i2c
 
-## 3) copy the TiaROne library
+## 3) copy the TiaR library
+
+In order to compile the code you will need to put the TiaR directory into
+your Arduino libraries directory.
+
+This library contains objects that will be common to various synthesizers.
+
+## 4) copy the TiaROne library
 
 In order to compile the code you will need to put the TiaROne directory into
 your Arduino libraries directory.
 
-This library contains the main code for the project
+This library contains the specific code for the TiaROne project
 
 

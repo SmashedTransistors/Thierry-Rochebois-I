@@ -11,7 +11,7 @@ a nice apple pie.
 T.Rochebois
 
 */
-namespace tiarone
+namespace tiar
 {
 //used in each voice (vox): receives and translates midi 
 //to voice note, velocity, gate and trig

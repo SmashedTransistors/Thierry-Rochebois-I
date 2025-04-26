@@ -19,10 +19,10 @@ class ReverbMS
   
 
 	//variables d'état
-	tiarone::TimeLine<16384> tL,tR;
+	tiar::TimeLine<16384> tL,tR;
   float* bufL;
   float* bufR;
-	tiarone::LFOSine lfo2,lfo3,lfo4;
+	tiar::LFOSine lfo2,lfo3,lfo4;
 
   float rate2=1.0f/24;
   float rate3=3;

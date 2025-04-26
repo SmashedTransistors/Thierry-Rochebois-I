@@ -11,7 +11,7 @@ a nice apple pie.
 T.Rochebois
 
 */
-namespace tiarone
+namespace tiar
 {
 class BSVF3B{
   //Discretized "Zero" Delay State Variable Filter
@@ -140,7 +140,7 @@ void update(float _Q, float F, bool jump){
 	void init(void){
 		D = lp0 = bp0 = lp1 = bp1 = lp2 = bp2 = 0;
 		cPitch=127;
-		int32_t alpha = tiarone::mtof(cPitch-12);
+		int32_t alpha = tiar::mtof(cPitch-12);
 
 		//MTOFEXTENDED(param_pitch + inlet_pitch-(27<<20), alpha);
 		update(  0.5f, alpha *  1.14e-11f ,true);
@@ -171,7 +171,7 @@ void update(float _Q, float F, bool jump){
     else
       df += 0.1f * (lerp<4>(3 * (*reso), tD) - df);
 
-		int32_t alpha = tiarone::mtof(cPitch-12);
+		int32_t alpha = tiar::mtof(cPitch-12);
 		update(  df, alpha *  1.14e-11f, jump || (*reso>0.5f));
 		
 		for(int i=0;i<LCALCBUF;i++){

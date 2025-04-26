@@ -11,7 +11,7 @@ a nice apple pie.
 T.Rochebois
 
 */
-namespace tiarone
+namespace tiar
 {
 // an efficient noise shaper to get the maximum from low cost I2S DACs
 // even if using 16 bit mode.  

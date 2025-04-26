@@ -22,7 +22,7 @@ class Common
   int32_t g1A[attr_size],g1B[attr_size];
   float reverbLevel=0.0f;
   float dryLevel=1.0f;
-  LFOSine lfo;
+  tiar::LFOSine lfo;
   float lfoRate=5.15f;
   int32_t lfoOut; // lfo global pour le lffunc <-------------------------------
   float pitchBend=0;
@@ -472,15 +472,15 @@ class Common
   //nouvelles fonctions
   class ParamSet2{
     public:
-    LsbMsbReceiver fCut;//74    k[0] 48
-    LsbMsbReceiver fMod;//73    k[1] 49
-    LsbMsbReceiver fEnv;//72    k[2] 50
+    tiar::LsbMsbReceiver fCut;//74    k[0] 48
+    tiar::LsbMsbReceiver fMod;//73    k[1] 49
+    tiar::LsbMsbReceiver fEnv;//72    k[2] 50
     int32_t fRes;//71   sel7
-    LsbMsbReceiver vEnv;//16    k[3] 51
-    LsbMsbReceiver mrph;//17obs   k[4] 52  1:modwheel
-    LsbMsbReceiver mMod;//18    k[5] 53  
-    LsbMsbReceiver mRat;//19    k[6] 54
-    LsbMsbReceiver vol; //7     k[7] 55
+    tiar::LsbMsbReceiver vEnv;//16    k[3] 51
+    tiar::LsbMsbReceiver mrph;//17obs   k[4] 52  1:modwheel
+    tiar::LsbMsbReceiver mMod;//18    k[5] 53  
+    tiar::LsbMsbReceiver mRat;//19    k[6] 54
+    tiar::LsbMsbReceiver vol; //7     k[7] 55
     int32_t a1;  //78   sel1
     int32_t b1;  //79   sel2
     int32_t mFunc;//77  sel3

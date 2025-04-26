@@ -25,7 +25,7 @@ class ChorusMS
   
 
 
-	tiarone::LFOSine lfoa,lfob;
+	tiar::LFOSine lfoa,lfob;
   
   float rates[4]={  0.015f, 0.11f, 0.19f, 0.33f};
   

@@ -19,9 +19,9 @@ class Synth
 	public:
   // everything is in static allocated
   // so that it is in the fastest ram bank in the teensy
-	tiarone::Common common;  // the common resources accessible by all voices
-	tiarone::Vox voxes[N];   // the N voices of the synth
-	MidiDispatcher<N> midi;  // The midi dispatcher that deals with voice stealing
+	Common common;  // the common resources accessible by all voices
+	Vox voxes[N];   // the N voices of the synth
+	tiar::MidiDispatcher<N> midi;  // The midi dispatcher that deals with voice stealing
 	
   // The audio rate outputs
   // points to block buffers

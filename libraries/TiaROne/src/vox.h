@@ -19,11 +19,11 @@ namespace tiarone
 class Vox
 {
 	public:
-	tiarone::MidiVox midi;  // The midi controls that provide pitch and gate information
+	tiar::MidiVox midi;  // The midi controls that provide pitch and gate information
 	Common *common;         // the pointer to common resources
-  LFOSine lfo;            // the LFO
-  LFFunc lff;             // the low frequency function generator. Acts as an LFO, or S&H or env
-  BSVF3B svf;             // the triple low pass filter
+  tiar::LFOSine lfo;            // the LFO
+  tiar::LFFunc lff;             // the low frequency function generator. Acts as an LFO, or S&H or env
+  tiar::BSVF3B svf;             // the triple low pass filter
   
   //kstate
   float pitch;

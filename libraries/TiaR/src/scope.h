@@ -11,7 +11,7 @@ a nice apple pie.
 T.Rochebois
 
 */
-namespace tiarone
+namespace tiar
 {
 class Scope{
 	public:
@@ -82,7 +82,7 @@ class Scope{
     else if(pitch<54){ds=8; _ds=1.0f/8; }
     else if(pitch<66){ds=4; _ds=1.0f/4; }
     else if(pitch<78){ds=2; _ds=1.0f/2; }
-		dp = tiarone::mtof(pitch);
+		dp = tiar::mtof(pitch);
     dp*=ds;
     _dp=2.32830e-10f/q_to_float(dp,32);
 

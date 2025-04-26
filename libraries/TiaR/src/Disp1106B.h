@@ -15,7 +15,7 @@ T.Rochebois
 #include <i2c_driver.h>
 #include "imx_rt1060/imx_rt1060_i2c_driver.h"
 #include "./tiar_font5x8.h"
-namespace tiarone
+namespace tiar
 {
   enum SSD1306 {
 LCDWIDTH            = 128,

@@ -184,51 +184,70 @@ class Osc{
       op1.syncSin(___SMMLA(n1,rnd=rnd*69069+1,rp1),dt);
       op2.syncSin(___SMMLA(n2,rnd=rnd*69069+1,rp2),dt);
     }
+    
     // control rate processing
     // it mainly consists in sliding the reset phases
     // and to calculate the phase increments for the operators    
     void kProc(int32_t MPitch){
+      
+      // pitches for each operator
       p2  =g[12];	p1=g[13];		p0=g[14];
+      
+      // reset phase increments (for "detune")
       rp2+=g[15]/16;
       rp1+=g[16]/16;
       rp0+=g[17]/16;
-      int32_t pch=___SMMLA(MPitch,kf2,p2>>5)<<5;
       
-      op2.dp = tiarone::mtof(q_to_float(pch,21)+64);
-      //MTOFEXTENDED(pch, op2.dp);
+      // pitches for each operator
+      //  follow more or less (key follow) the master pitch
+      
+      int32_t pch=___SMMLA(MPitch,kf2,p2>>5)<<5; 
+      // conversion from pitch to phase increments      
+      op2.dp = tiar::mtof(q_to_float(pch,21)+64);
+      
       pch=___SMMLA(MPitch,kf1,p1>>5)<<5;
-      op1.dp = tiarone::mtof(q_to_float(pch,21)+64);
-      //MTOFEXTENDED(pch, op1.dp);
+      op1.dp = tiar::mtof(q_to_float(pch,21)+64);
+
       pch=___SMMLA(MPitch,kf0,p0>>5)<<5;
-      op0.dp = tiarone::mtof(q_to_float(pch,21)+64);
-      //MTOFEXTENDED(pch, op0.dp);		
+      op0.dp = tiar::mtof(q_to_float(pch,21)+64);
+	
     }
   };
 
   public:
   //________________________________________________________________
+  // here comes the oscillator itself that will use the internal classes
+  
+  
 	//aRate Ins
+  // no audio rate inputs
 
 	//aRate Out
-	float *bOut=nullptr;
-	float *bOutCh=nullptr;
-	float *bOutRv=nullptr;
+  // audio rate outputs are block buffers to 
+	float *bOut=nullptr;   // main output
+	float *bOutCh=nullptr; // chorus output
+	float *bOutRv=nullptr; // reverb output
 	//kRate in
+  // control rate inputs are pointers to values
   float *pitch;
   float *gain, *gainCh, *gainRv;
   bool *reset;
   int *grainType;
-  float *alpha;
+  float *alpha;    // morphing control
 
   Sl slA,slB;
 
-  uint32_t pM;
-  float fdpM;
-  int32_t dpM;
-  float _dpM;
+  uint32_t pM;   // master phase
+  float fdpM;    // float master phase increment (used for subsample synch)
+  int32_t dpM;   // master phase increment
+  float _dpM;    //inverse of float master phase increment (used for subsample synch)
   int32_t aReset;
+  // reset request for reset phases on note on
+  // this allows to have "detuning" and consistent
+  // behaviour on note on
   int32_t doReset0,doReset1;
-  Common* common;
+  
+  Common* common; // common synth resources
   
   static const int attr_size=27;
   int32_t gA[attr_size],gB[attr_size];
@@ -270,7 +289,7 @@ class Osc{
     common->presetInterp(float_to_q(*alpha,27), gA, gB);
     
     
-    dpM=mtof(*pitch);
+    dpM=tiar::mtof(*pitch);
     fdpM = q_to_float(dpM, 32);
     _dpM = 1.0f / dpM;
     slA.kProc(float_to_q(*pitch-64,21));
@@ -302,11 +321,15 @@ class Osc{
 
     int32_t grainOff=grainOffsets[(*grainType)%4];
     
-    if(*grainType<4){ //Tri
+    if(*grainType<4){ //Triangle 
       uint32_t pStart=pM;
       pM+=grainOff;
       for(int s=0;s<LCALCBUF;s++){
         pM += dpM;
+        
+        //pM<<(uint32_t)dpM when pM has just been moduloed (32 bit limitation)
+        //pM*_dpM corresponds to the subsample delay since this event.
+        // this allows accurate synch of the slaves
         if(pM<(uint32_t)dpM) {
           if(doReset1){slB.rp0=0;slB.rp1=0;slB.rp2=0;doReset1=false;}
           slB.syncTri(float_to_q(pM*_dpM,27));
@@ -334,7 +357,7 @@ class Osc{
         bOutCh[s] += q_to_float(___SMMUL(e0,slA.outCh),27);
         bOutRv[s] += q_to_float(___SMMUL(e0,slA.outRv),27);
       }    
-    } else { //Sin
+    } else { //Sine
       uint32_t pStart=pM;
       pM+=grainOff;
       for(int s=0;s<LCALCBUF;s++){
