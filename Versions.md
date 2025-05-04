@@ -5,6 +5,16 @@
 ----------------------------------------------------------------------------
 ## Versions
 
+### Thierry-Rochebois-I-alpha009
+
+Sends sound editing to the PC via usb:
+CCs and program changes
+shift+Chorus -> sends all parameters as CCs
+
+### Thierry-Rochebois-I-alpha008
+
+Code refactoring
+
 ### Thierry-Rochebois-I-alpha007
 
 A few more presets.

@@ -26,6 +26,7 @@ class Common
   float lfoRate=5.15f;
   int32_t lfoOut; // lfo global pour le lffunc <-------------------------------
   float pitchBend=0;
+  usb_midi_class *usbMIDI;
   
   //_________________________________________________
   // Partie display
@@ -415,8 +416,9 @@ class Common
 
   
   
-  void init(){
+  void init(usb_midi_class *pUsbMIDI){
     lfo.rate=&lfoRate;
+    usbMIDI = pUsbMIDI;
   }
   
   void presetSel(int selA, int32_t *g){
@@ -511,6 +513,12 @@ class Common
     toLastMod(stFCut);
     detailCpt=3000; //1s;
   }
+  void transmitFCut(){
+    int v = params2.fCut.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(74, (uint8_t) v, 0);
+  }
   void updateFMod(){
     fMod=params2.fMod.val<<(27-14); //q14 ->q27
     int32_t s=2*fMod-(64<<21);
@@ -519,6 +527,13 @@ class Common
     toLastMod(stFMod);
     detailCpt=3000; //1s;
   }
+  void transmitFMod(){
+    int v = params2.fMod.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(73, (uint8_t) v, 0);
+  }
+  
   void updateFEnv(){
     int32_t env=params2.fEnv.val<<(27-14);
     to_c(env, lines[1]+10);
@@ -527,6 +542,12 @@ class Common
     detailCpt=3000; //1s;
     fEnv=q_to_float(env,27-3); //q14 ->q27
     fEnvR=lerp8(fEnv, 1-0.010f, 1-0.005f, 1-0.003f, 1-0.002f, 1-0.001f, 1-0.0005f, 1-0.0002f, 1-0.0001f);
+  }
+  void transmitFEnv(){
+    int v = params2.fEnv.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(72, (uint8_t) v, 0);
   }  
   void updateVEnv(){
     int32_t env=params2.vEnv.val<<(27-14);
@@ -539,7 +560,14 @@ class Common
     vEnvA=lerp8(vEnv,   1.000f,   1.000f,   1.0000f,    0.003f,   0.0001f,   0.002f,   0.005f,   0.01f);
     vEnvR=lerp8(vEnv, 1-1.000f, 1-0.003f, 1-0.0003f, 1-0.0005f, 1-0.0005f, 1-0.002f, 1-0.003f, 1-0.005f);
 
+  }
+  void transmitVEnv(){
+    int v = params2.vEnv.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(16, (uint8_t) v, 0);
   } 
+  
   void updateMrph(){
     mrph=params2.mrph.val<<(27-14);
     to_c(mrph, lines[3]+0);
@@ -547,6 +575,12 @@ class Common
     toLastMod(stMrph);
     detailCpt=3000; //1s;
   }
+  void transmitMrph(){
+    int v = params2.mrph.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(1, (uint8_t) v, 0);  //modWheel !
+  } 
   void updateMMod(){
     mMod=params2.mMod.val<<(27-14);
     to_c(mMod, lines[3]+5);
@@ -554,12 +588,24 @@ class Common
     toLastMod(stMMod);
     detailCpt=3000; //1s;
   }
+  void transmitMMod(){
+    int v = params2.mMod.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(18, (uint8_t) v, 0);  //modWheel !
+  }
   void updateMRate(){
     mRat=params2.mRat.val<<(27-14);
     to_c(mRat, lines[3]+10);
     to_c(mRat,stMRat + 5); 
     toLastMod(stMRat);
     detailCpt=3000; //1s;
+  }
+  void transmitMRate(){
+    int v = params2.mRat.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(19, (uint8_t) v, 0);  //modWheel !
   }  
   void updateVol(){
     vol=params2.vol.val<<(27-14);
@@ -567,6 +613,12 @@ class Common
     to_c(vol,stVol + 5); 
     toLastMod(stVol);
     detailCpt=3000; //1s;
+  }
+  void transmitVol(){
+    int v = params2.vol.val>>7;
+    if(v>127) v=127;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(7, (uint8_t) v, 0);
   }
   void updateSym(){
     static char syms[8][9]={"Tri 1/2 ","Tri 1/3 ","Tri 1/4 ","Tri 0.49",
@@ -583,6 +635,11 @@ class Common
     toLastMod(stSym); 
     detailCpt=3000;
   }
+  void transmitSym(){
+    int v = params2.sym;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(94, (uint8_t) v, 0);
+  }
   void updateCh(){
     static char chor[4][5]={"Ch0","Ch1","Ch2","Ch3"};
     for(int i=0;i<3;i++){
@@ -592,6 +649,11 @@ class Common
     toLastMod(stCh); 
     detailCpt=3000;
   }
+  void transmitCh(){
+    int v = params2.ch;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(93, (uint8_t) v, 0);
+  }
   void updateRev(){
     apcDisplay->setRev(params2.rev);
     static char revs[8][5]={"Rev0","Rev1","Rev2","Rev3","Rev4","Rev5","Rev6","Rev7"};
@@ -599,10 +661,19 @@ class Common
       lines[7][i]=revs[params2.rev][i];
     }
   }
+  void transmitRev(){
+    int v = params2.rev;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(91, (uint8_t) v, 0);
+  }
   void updateFRes(){
     apcDisplay->setRes(params2.fRes);
   }
-  
+  void transmitFRes(){
+    int v = params2.fRes;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(71, (uint8_t) v, 0);
+  }  
   void updateA1(){
     static char types[8][4]={"SAW","STR","SYN","PLK","DXW","TOY","GRG","END"};
     apcDisplay->setA1(params2.a1);
@@ -613,6 +684,11 @@ class Common
     int n=params2.a1&3;
     lines[5][19]='0'+n;
   }
+  void transmitA1(){
+    int v = params2.a1;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(78, (uint8_t) v, 0);
+  }  
   void updateA0(){
     static char types[8][4]={"SAW","STR","SYN","PLK","DXW","TOY","GRG","END"};
     apcDisplay->setA0(params2.a0);
@@ -623,6 +699,11 @@ class Common
     int n=params2.a0&3;
     lines[5][4]='0'+n;
   }
+  void transmitA0(){
+    int v = params2.a0;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(75, (uint8_t) v, 0);
+  }  
   void updateB1(){
     static char types[8][4]={"SAW","STR","SYN","PLK","DXW","TOY","GRG","END"};
     apcDisplay->setB1(params2.b1);
@@ -639,6 +720,11 @@ class Common
       }
     }
   }
+  void transmitB1(){
+    int v = params2.b1;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(79, (uint8_t) v, 0);
+  } 
   void updateB0(){
     static char types[8][4]={"SAW","STR","SYN","PLK","DXW","TOY","GRG","END"};
     apcDisplay->setB0(params2.b0);
@@ -655,6 +741,11 @@ class Common
       }
     }    
   }
+  void transmitB0(){
+    int v = params2.b0;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(76, (uint8_t) v, 0);
+  } 
   void updateMFunc(){
     apcDisplay->setLFF(params2.mFunc);
         static char funcs[8][11]={
@@ -671,8 +762,35 @@ class Common
       lines[4][5+i]=funcs[params2.mFunc][i];
     }
   }
+  void transmitMFunc(){
+    int v = params2.mFunc;
+    //usbMIDI->sendControlChange(uint8_t control, uint8_t value, uint8_t channel)
+    usbMIDI->sendControlChange(77, (uint8_t) v, 0);
+  } 
 
-
+  void transmitPc(int pc){
+    usbMIDI->sendProgramChange((uint8_t) pc, 0);
+  } 
+  void transmitAll(){
+    transmitFCut();
+    transmitFMod();
+    transmitFEnv();
+    transmitVEnv();
+    transmitMrph();
+    transmitMMod();
+    transmitMRate();  
+    transmitVol();
+    transmitRev();
+    transmitCh(); 
+    transmitSym();
+    transmitFRes();   
+    transmitA1();     
+    transmitB1();     
+    transmitA0();     
+    transmitB0();     
+    transmitMFunc();  
+  }
+  
   void bProc(){
     lfoRate=q_to_float(mRat,27-3);
     lfoRate=lerp8(lfoRate,   0.04f,   0.1f,   0.2f,   0.6f,   1.4f,  3.0f,   5.0f,   10.3f);

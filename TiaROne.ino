@@ -85,19 +85,20 @@ void setup(){
   disp.setText(0,titre);
   scope.init();
   
-  usbMIDI.setHandleNoteOff(OnNoteOff);
-  usbMIDI.setHandleNoteOn(OnNoteOn);
-  usbMIDI.setHandleControlChange(OnControlChange);
-  usbMIDI.setHandleProgramChange(OnProgramChange);
-  usbMIDI.setHandlePitchChange(OnPitchChange);
-  MIDI.setHandlePitchBend(OnPitchChange);
+  usbMIDI.setHandleNoteOff(onNoteOffPc);
+  usbMIDI.setHandleNoteOn(onNoteOnPc);
+  usbMIDI.setHandleControlChange(onControlChangePc);
+  usbMIDI.setHandleProgramChange(onProgramChangePc);
+  usbMIDI.setHandlePitchChange(onPitchChangePc);
+
+  MIDI.setHandlePitchBend(onPitchChangeDin);
 
   apcReceiver.common=&synth.common;
   apcReceiver.synth=&synth;
   apcDisplay.midi1 = &midi1; //utilisé pour envoyer les commandes
   synth.common.apcDisplay=&apcDisplay;
 
-  synth.init(bufs, accBuf, accBufCh, accBufRv);
+  synth.init(bufs, accBuf, accBufCh, accBufRv, &usbMIDI);
   reverb.init(accBufRv, reverbL, reverbR);
   chorus.init(accBufCh, chorusL, chorusR);
   conso1=LCALCBUF;
@@ -117,16 +118,16 @@ void setup(){
 
   MIDI.begin(MIDI_CHANNEL_OMNI);
 
-	midi1.setHandleNoteOff(AkaiOnNoteOff);
-	midi1.setHandleNoteOn(AkaiOnNoteOn);
-	midi1.setHandleControlChange(AkaiOnControlChange);
+	midi1.setHandleNoteOff(onNoteOffAkai);
+	midi1.setHandleNoteOn(onNoteOnAkai);
+	midi1.setHandleControlChange(onControlChangeAkai);
 
   pinMode(LED_BUILTIN, OUTPUT);
   delay(200);
   digitalWrite(LED_BUILTIN, HIGH);
   synth.handleCC(0, 7, 96);//vol
 
-  OnProgramChange(0,127); //se cale sur le dernier
+  onProgramChangeDin(0,127); //se cale sur le dernier
 
 
 }
@@ -149,16 +150,16 @@ void loop(){
   while(MIDI.read()){ // look for a message
     switch(MIDI.getType()){ // get message type
       case midi::NoteOn:
-        OnNoteOn(MIDI.getChannel(), MIDI.getData1(),  MIDI.getData2());
+        onNoteOnDin(MIDI.getChannel(), MIDI.getData1(),  MIDI.getData2());
         break;
       case midi::NoteOff:
-        OnNoteOff(MIDI.getChannel(), MIDI.getData1(),  MIDI.getData2());
+        onNoteOffDin(MIDI.getChannel(), MIDI.getData1(),  MIDI.getData2());
         break;
         case midi::ControlChange:
-        OnControlChange(MIDI.getChannel(), MIDI.getData1(),  MIDI.getData2());
+        onControlChangeDin(MIDI.getChannel(), MIDI.getData1(),  MIDI.getData2());
                 break;
         case midi::ProgramChange:
-        OnProgramChange(MIDI.getChannel(), MIDI.getData1());
+        onProgramChangeDin(MIDI.getChannel(), MIDI.getData1());
       default:
         break;
     }
@@ -297,12 +298,7 @@ void loop(){
 
 }
 
-void OnNoteOff(byte channel, byte note, byte velocity)
-{
-  synth.noteOff(channel,note,velocity);
-}
-
-void OnNoteOn(byte channel, byte note, byte velocity)
+void onNoteOnPc(byte channel, byte note, byte velocity)
 {
   if(velocity!=0) 
     latestPitch=note;
@@ -310,44 +306,24 @@ void OnNoteOn(byte channel, byte note, byte velocity)
   
   Serial.printf("note=%d\n",note);
 }
-
-
-
-void OnControlChange(byte channel, byte control, byte value)
+void onNoteOnDin(byte channel, byte note, byte velocity)
 {
-  if(Serial){
-    Serial.printf("CC, ch=%d control=%d, value=%d\n",channel,control,value);
-  }
-  synth.handleCC(channel, control, value);
-}
-void OnProgramChange(byte channel, byte n) {
-  synth.handleProgramChange(channel, n);
-
-}
-void OnPitchChange(byte channel, int value)
-{
-  if(Serial){
-    Serial.printf("PitchChange, ch=%d value=%d\n",channel,value);
-  }
-  synth.HandlePitchBend(channel, value);
+  if(velocity!=0) 
+    latestPitch=note;
+  synth.noteOn(channel,note,velocity); 
+  Serial.printf("note=%d\n",note);
 }
 
-void AkaiOnNoteOff(byte channel, byte note, byte velocity)
-{
-  int cable = midi1.getCable();
-  if(cable==0){
-    synth.noteOff(channel,note,velocity);
-  } else {
-    if(note==98){
-      apcReceiver.setShift(false);
-    }
-  }
-}
-void AkaiOnNoteOn(byte channel, byte note, byte velocity)
+
+
+
+void onNoteOnAkai(byte channel, byte note, byte velocity)
 {
   int cable = midi1.getCable();
   if(cable==0){
     synth.noteOn(channel,note,velocity);
+    usbMIDI.sendNoteOn(note, velocity, channel); // up to the PC
+    Serial.printf("usbMIDI.sendNoteOn %d %d %d,\n",note, velocity, channel);
     if(velocity!=0) {
       latestPitch=note;
     }
@@ -360,7 +336,44 @@ void AkaiOnNoteOn(byte channel, byte note, byte velocity)
   }
   Serial.printf("USBHost Note ch=%d cable=%d, note=%d, vel=%d\n",channel,midi1.getCable(),note,velocity);
 }
-void AkaiOnControlChange(byte channel, byte control, byte value)
+//______________________________________________________________________
+void onNoteOffPc(byte channel, byte note, byte velocity)
+{
+  synth.noteOff(channel,note,velocity);
+}
+void onNoteOffDin(byte channel, byte note, byte velocity)
+{
+  synth.noteOff(channel,note,velocity);
+}
+void onNoteOffAkai(byte channel, byte note, byte velocity)
+{
+  int cable = midi1.getCable();
+  if(cable==0){
+    synth.noteOff(channel,note,velocity);
+    usbMIDI.sendNoteOff(note, velocity, channel); // up to the PC
+  } else {
+    if(note==98){
+      apcReceiver.setShift(false);
+    }
+  }
+}
+//______________________________________________________________________
+
+void onControlChangePc(byte channel, byte control, byte value)
+{
+  if(Serial){
+    Serial.printf("CC, ch=%d control=%d, value=%d\n",channel,control,value);
+  }
+  synth.handleCC(channel, control, value);
+}
+void onControlChangeDin(byte channel, byte control, byte value)
+{
+  if(Serial){
+    Serial.printf("CC, ch=%d control=%d, value=%d\n",channel,control,value);
+  }
+  synth.handleCC(channel, control, value);
+}
+void onControlChangeAkai(byte channel, byte control, byte value)
 {
   if(Serial){
     Serial.printf("AkaiOnControlChange, ch=%d cable=%d, control=%d, value=%d\n",channel,midi1.getCable(),control,value);
@@ -377,8 +390,32 @@ void AkaiOnControlChange(byte channel, byte control, byte value)
   Serial.printf("synth.common.params2.mMod.val = %d\n", synth.common.params2.mMod.val);
   Serial.printf("synth.common.params2.mRet.val = %d\n", synth.common.params2.mRat.val);
   Serial.printf("synth.common.params2.vol.val = %d\n", synth.common.params2.vol.val);
-
-
-  
+ 
 }
+//______________________________________________________________________
+
+void onProgramChangePc(byte channel, byte n) {
+  synth.handleProgramChange(channel, n);
+}
+void onProgramChangeDin(byte channel, byte n) {
+  synth.handleProgramChange(channel, n);
+}
+//______________________________________________________________________
+void onPitchChangePc(byte channel, int value)
+{
+  if(Serial){
+    Serial.printf("PitchChange, ch=%d value=%d\n",channel,value);
+  }
+  synth.HandlePitchBend(channel, value);
+}
+void onPitchChangeDin(byte channel, int value)
+{
+  if(Serial){
+    Serial.printf("PitchChange, ch=%d value=%d\n",channel,value);
+  }
+  synth.HandlePitchBend(channel, value);
+}
+
+
+
 

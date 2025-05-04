@@ -34,41 +34,54 @@ class APC25Receiver{
     switch(control){
       case 64:
         if(value>64){
-          common->params2.ch=((common->params2.ch+1)&3);
-          common->updateCh();
+          if(shift){
+            common->transmitAll();
+          }else{
+            common->params2.ch=((common->params2.ch+1)&3);
+            common->updateCh();
+            common->transmitCh();
+          }          
         }
       break;
       case 48: 
         common->params2.fCut.handleRelative(value);   //type LsbMsbReceiver
-        common->updateFCut();  //mise à jour de l'affichage et paramètres scalés pour la synthèse      
+        common->updateFCut();  //mise à jour de l'affichage et paramètres scalés pour la synthèse
+        common->transmitFCut();        
       break;
       case 49: 
         common->params2.fMod.handleRelative(value);
-        common->updateFMod();        
+        common->updateFMod();
+        common->transmitFMod();       
       break;
       case 50: 
         common->params2.fEnv.handleRelative(value);
         common->updateFEnv();        
+        common->transmitFEnv();        
       break;
       case 51: 
         common->params2.vEnv.handleRelative(value);
         common->updateVEnv();        
+        common->transmitVEnv();        
       break;
       case 52: 
         common->params2.mrph.handleRelative(value);
         common->updateMrph();        
+        common->transmitMrph();        
       break;
       case 53: 
         common->params2.mMod.handleRelative(value);
         common->updateMMod();        
+        common->transmitMMod();        
       break;
       case 54: 
         common->params2.mRat.handleRelative(value);
         common->updateMRate();        
+        common->transmitMRate();        
       break;
       case 55: 
         common->params2.vol.handleRelative(value); 
         common->updateVol();        
+        common->transmitVol();        
       break;
 
       }
@@ -113,6 +126,7 @@ class APC25Receiver{
       int btn=note%8;
       int pc=ln*8+btn;
       synth->handleProgramChange(0, pc);
+      common->transmitPc(pc);
       return;
     }
     
@@ -122,6 +136,7 @@ class APC25Receiver{
     if(note==93){
       common->params2.sym=(common->params2.sym+1)&7;
       common->updateSym(); // pour le display
+      common->transmitSym();     
     } else if(note==91){
       common->baseDispMode++;
       common->baseDispMode&=1;
@@ -132,9 +147,11 @@ class APC25Receiver{
       static int nToCol[6]{0,  5,  4,  3,  2,  1};
       common->params2.fRes=nToCol[note-81];
       common->updateFRes();
+      common->transmitFRes();
     } else if(note>=64 && note<72){
       common->params2.rev=note-64;
       common->updateRev();
+      common->transmitRev();
     } else if(note<40){
       int ln=note/8;
       int btn=note%8;
@@ -149,6 +166,7 @@ class APC25Receiver{
         }
         common->params2.a1=litPadA1*4+stateA1;
         common->updateA1();
+        common->transmitA1();
       }
       
       if(ln==3){
@@ -164,6 +182,7 @@ class APC25Receiver{
         else
           common->params2.b1=litPadB1*4+stateB1;
         common->updateB1();
+        common->transmitB1();
       }
       
       if(ln==2){
@@ -172,6 +191,7 @@ class APC25Receiver{
           litPadLFF=btn;
           common->params2.mFunc=btn;
           common->updateMFunc();
+          common->transmitMFunc();
         }
       }
       
@@ -186,6 +206,7 @@ class APC25Receiver{
         }
         common->params2.a0=litPadA0*4+stateA0;
         common->updateA0();
+        common->transmitA0();
       }
       
       if(ln==0){
@@ -203,6 +224,7 @@ class APC25Receiver{
         else
           common->params2.b0=litPadB0*4+stateB0;
         common->updateB0();
+        common->transmitB0();
       }
       
     }

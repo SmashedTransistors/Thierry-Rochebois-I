@@ -34,7 +34,8 @@ class Synth
   float* tmpBuf,       // temporary block buffers that are recycled
   float* accBufOut,    // fixed block buffers
   float* accBufOutCh,
-  float* accBufOutRv
+  float* accBufOutRv,
+  usb_midi_class *usbMIDI
   ){
 		bOut  =accBufOut;
 		bOutCh=accBufOutCh;
@@ -43,7 +44,7 @@ class Synth
 			voxes[i].init(tmpBuf, bOut, bOutCh, bOutRv, &common);
 			midi.setMidiVox(&(voxes[i].midi),i);
 		}
-    common.init();
+    common.init(usbMIDI);
 	}
   
   // block Processing
