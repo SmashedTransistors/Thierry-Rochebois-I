@@ -5,6 +5,10 @@
 ----------------------------------------------------------------------------
 ## Versions
 
+### Thierry-Rochebois-I-alpha010
+
+Transmits Midi coming from the midi Din to the PC
+
 ### Thierry-Rochebois-I-alpha009
 
 Sends sound editing to the PC via usb:

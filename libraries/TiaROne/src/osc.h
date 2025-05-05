@@ -246,6 +246,8 @@ class Osc{
   // this allows to have "detuning" and consistent
   // behaviour on note on
   int32_t doReset0,doReset1;
+  int32_t grainOff;
+  
   
   Common* common; // common synth resources
   
@@ -276,6 +278,7 @@ class Osc{
     pM = 0;
     aReset=false;
     doReset0=false;doReset1=false;
+    grainOff=0x7FFFFFFF;
 
     slA.g=gA;
     slB.g=gB;
@@ -319,7 +322,7 @@ class Osc{
     //T1/2 T1/3 T1/4 T7/16
     static const int32_t grainOffsets[4]={0x7FFFFFFF,1431655765,1073741824,2083059138};
 
-    int32_t grainOff=grainOffsets[(*grainType)%4];
+    grainOff=___SMMLA(0x01000000,grainOffsets[(*grainType)%4]-grainOff,grainOff);
     
     if(*grainType<4){ //Triangle 
       uint32_t pStart=pM;

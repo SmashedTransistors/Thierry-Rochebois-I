@@ -310,7 +310,8 @@ void onNoteOnDin(byte channel, byte note, byte velocity)
 {
   if(velocity!=0) 
     latestPitch=note;
-  synth.noteOn(channel,note,velocity); 
+  synth.noteOn(channel,note,velocity);
+  usbMIDI.sendNoteOn(note, velocity, channel); // up to the PC 
   Serial.printf("note=%d\n",note);
 }
 
@@ -344,6 +345,7 @@ void onNoteOffPc(byte channel, byte note, byte velocity)
 void onNoteOffDin(byte channel, byte note, byte velocity)
 {
   synth.noteOff(channel,note,velocity);
+  usbMIDI.sendNoteOff(note, velocity, channel); // up to the PC
 }
 void onNoteOffAkai(byte channel, byte note, byte velocity)
 {
@@ -372,6 +374,7 @@ void onControlChangeDin(byte channel, byte control, byte value)
     Serial.printf("CC, ch=%d control=%d, value=%d\n",channel,control,value);
   }
   synth.handleCC(channel, control, value);
+  usbMIDI.sendControlChange(control,  value, channel);
 }
 void onControlChangeAkai(byte channel, byte control, byte value)
 {
@@ -399,6 +402,7 @@ void onProgramChangePc(byte channel, byte n) {
 }
 void onProgramChangeDin(byte channel, byte n) {
   synth.handleProgramChange(channel, n);
+  usbMIDI.sendProgramChange(n, channel);
 }
 //______________________________________________________________________
 void onPitchChangePc(byte channel, int value)
@@ -414,6 +418,7 @@ void onPitchChangeDin(byte channel, int value)
     Serial.printf("PitchChange, ch=%d value=%d\n",channel,value);
   }
   synth.HandlePitchBend(channel, value);
+  usbMIDI.sendPitchBend(value, channel);
 }
 
 
