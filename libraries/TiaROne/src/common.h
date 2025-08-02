@@ -491,6 +491,31 @@ class Common
     int32_t rev; //91   sel6
     int32_t ch;  //93 selCh
     int32_t sym; //94   selSym
+    
+    
+    /*
+        static uint8_t patches[128*16]={
+    //FCut  FMod FEnv FRes vEnv Mrph MMod MRat  A1 B1 Mfunc A0 B0 SYM REV CH
+        0,  127,  32,   2,   0,   0,  81,  40,  2, 2,    0, 0, 1,  0,  2, 1, // 0 bass
+        */
+    void toPatch(uint8_t* p){
+      p[0]=(uint8_t)(fCut.val>>7);
+      p[1]=(uint8_t)(fMod.val>>7);
+      p[2]=(uint8_t)(fEnv.val>>7);
+      p[3]=(uint8_t)(fRes);
+      p[4]=(uint8_t)(vEnv.val>>7);
+      p[5]=(uint8_t)(mrph.val>>7);
+      p[6]=(uint8_t)(mMod.val>>7);
+      p[7]=(uint8_t)(mRat.val>>7);
+      p[8]=(uint8_t)(a1);
+      p[9]=(uint8_t)(b1);
+      p[10]=(uint8_t)(mFunc);     
+      p[11]=(uint8_t)(a0);
+      p[12]=(uint8_t)(b0);
+      p[13]=(uint8_t)(sym);
+      p[14]=(uint8_t)(rev);
+      p[15]=(uint8_t)(ch);
+    }      
   };
   
   ParamSet2 params2;
