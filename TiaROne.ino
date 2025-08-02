@@ -99,6 +99,7 @@ void setup(){
   synth.common.apcDisplay=&apcDisplay;
 
   synth.init(bufs, accBuf, accBufCh, accBufRv, &usbMIDI);
+  synth.initPatches();
   reverb.init(accBufRv, reverbL, reverbR);
   chorus.init(accBufCh, chorusL, chorusR);
   conso1=LCALCBUF;

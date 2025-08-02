@@ -78,10 +78,15 @@ class Synth
 		midi.noteOn(channel, note, velocity);
 	}
   // Control Changes Pitch Bend and Program Changes are
-  // handled by the Common object (that deals with everything
+  // mostly handled by the Common object (that deals with everything
   // that is common to all voices).
   void handleCC(byte channel, byte control, byte value){
     common.handleCC(channel, control, value);
+    if(control == 119){ //save to EEPROM
+      saveCurrentToPatch(value);
+      savePatchToEEPROM(value);
+      Serial.printf("saveCurrentToPatch %d\n",value);
+    }
   }
   void HandlePitchBend(byte channel, int value){
     common.HandlePitchBend(channel, value);

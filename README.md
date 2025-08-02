@@ -185,6 +185,8 @@ PIN 5  ------------------+--------|2           5|------+-- GND     | |
 
 ## CC
 
+### Patch CCs
+
 |  CC  | Description        | CC Values | Notes                                                                                    |
 |------|--------------------|-----------|------------------------------------------------------------------------------------------|
 |   `7`| Volume             | 0..127    |                                                                                          |
@@ -204,6 +206,13 @@ PIN 5  ------------------+--------|2           5|------+-- GND     | |
 |  `75`| A0 Morpheme 1      | 0..31     | all available since alpha001                                                             |
 |  `76`| B0 Morpheme 1      | 0..32     | all available since alpha001                                                             |
 |  `94`| Wave symetry ratio | 0..7      | 0..3 triangle based <br/>4..7 sine based<br/>T1/2 T1/3 T1/4 T.49<br/>S1/2 S1/3 S1/4 S.49 |
+
+### Editor CCs
+
+| CC    | Description     | CC Values | Notes                                             |
+|-------|-----------------|-----------|---------------------------------------------------|
+| `119` | Save to presets | 0..127    | Saves the current preset settings to synth EEPROM |
+
 
 ## Morph Function
 Without morph modulation, the morphing from [A0,B0] to [A1,B1] is controlled by the modwheel.
