@@ -327,6 +327,9 @@ class Osc{
     if(*grainType<4){ //Triangle 
       uint32_t pStart=pM;
       pM+=grainOff;
+      
+      //phase compensation for slA vs slB -> for next gen synth ?
+      //float coef=grainOff/(float)dpM;
       for(int s=0;s<LCALCBUF;s++){
         pM += dpM;
         
@@ -349,7 +352,12 @@ class Osc{
       for(int s=0;s<LCALCBUF;s++){
         pM += dpM;
         if(pM<(uint32_t)dpM) {
-          if(doReset0){slA.rp0=0;slA.rp1=0;slA.rp2=0;doReset0=false;}
+          if(doReset0){
+            slA.rp0=0;//(uint32_t)(slA.op0.dp*coef);
+            slA.rp1=0;//(uint32_t)(slA.op1.dp*coef);
+            slA.rp2=0;//(uint32_t)(slA.op2.dp*coef);
+            doReset0=false;
+            }
           slA.syncTri(float_to_q(pM*_dpM,27));
         }
         slA.procTri();
