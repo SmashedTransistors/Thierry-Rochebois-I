@@ -365,7 +365,7 @@ void onNoteOffAkai(byte channel, byte note, byte velocity)
 void onControlChangePc(byte channel, byte control, byte value)
 {
   if(Serial){
-    Serial.printf("CC, ch=%d control=%d, value=%d\n",channel,control,value);
+    Serial.printf("from computer  CC, ch=%d control=%d, value=%d\n",channel,control,value);
   }
   synth.handleCC(channel, control, value);
 }

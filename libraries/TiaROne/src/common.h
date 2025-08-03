@@ -800,20 +800,24 @@ class Common
     transmitFCut();
     transmitFMod();
     transmitFEnv();
+    transmitFRes();   
+    
     transmitVEnv();
     transmitMrph();
     transmitMMod();
     transmitMRate();  
-    transmitVol();
-    transmitRev();
-    transmitCh(); 
-    transmitSym();
-    transmitFRes();   
+
     transmitA1();     
     transmitB1();     
+    transmitMFunc();  
     transmitA0();     
     transmitB0();     
-    transmitMFunc();  
+
+    transmitSym();
+    transmitRev();
+    transmitCh(); 
+
+    transmitVol();
   }
   
   void bProc(){

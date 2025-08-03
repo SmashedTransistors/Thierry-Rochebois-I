@@ -209,9 +209,10 @@ PIN 5  ------------------+--------|2           5|------+-- GND     | |
 
 ### Editor CCs
 
-| CC    | Description     | CC Values | Notes                                             |
-|-------|-----------------|-----------|---------------------------------------------------|
-| `119` | Save to presets | 0..127    | Saves the current preset settings to synth EEPROM |
+| CC    | Description                 | CC Values | Notes                                                                                             |
+|-------|-----------------------------|-----------|---------------------------------------------------------------------------------------------------|
+| `118` | Send current preset request | X         | Requests the current synth settings to be sendt as a series of CC from the Teensy to the computer |
+| `119` | Save to presets             | 0..127    | Saves the current preset settings to the teensy EEPROM. The CC controls the location              |
 
 
 ## Morph Function
