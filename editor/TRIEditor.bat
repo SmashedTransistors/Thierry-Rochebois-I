@@ -1,1 +1,2 @@
-java -jar TRIEditor.jar
+@ECHO OFF
+start javaw -jar TRIEditor.jar
