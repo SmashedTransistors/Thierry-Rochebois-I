@@ -40,6 +40,7 @@ It is a kind of morphing that takes care of navigating through the synthesis par
 _Thierry-Rochebois-I_ navigates in a 54 dimension hyperspace.
 
 
+
 ## TR-I (Thierry-Rochebois-I)
 
 I had many funny names in mind but most of them would have been a cause of conflict
@@ -63,6 +64,11 @@ and add what you want.
 
 ### Base
 **You only need a Teensy4.1 and a I2S audio DAC to try it...**
+It will be responsive to note Ons, Program Changes and control Changes from your PC/Daw.
+
+I coded a little preset editor so that you can edit and flash your own presets in EEPROM.
+
+![Editor](./pictures/Editor.png)
 
 and if you like it you can add some goodies if you want to go further.
 ### Options
@@ -73,6 +79,7 @@ and if you like it you can add some goodies if you want to go further.
 
 ![All Options](./photos/AllOptions.jpg)
 ![All Options](./photos/APCkey25MkII.jpg)
+
 
 ### Teensy4.1 to UDA1334A Breakout
 [AdaFruit Id3678](https://www.adafruit.com/product/3678)  or copy
