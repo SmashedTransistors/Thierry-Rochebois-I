@@ -16,7 +16,6 @@ public class TRIEditor extends JPanel implements Receiver {
     public static final Color REV_ON = Color.red;
     public static final Color FUNC_OFF = new Color(180, 170, 230);
     public static final Color FUNC_ON = new Color(220, 90, 255);
-    private static final int CONTROL_NOTE_ON = 0x90;
 
     @Override
     public void send(MidiMessage message, long timeStamp) {
@@ -57,19 +56,19 @@ public class TRIEditor extends JPanel implements Receiver {
             break;
 
             case 91: {
-                getCurrentPreset().rev = value <= 7 ? value : 7;
+                getCurrentPreset().rev = Math.min(value, 7);
             }
             break;
             case 93: {
-                getCurrentPreset().ch = value <= 3 ? value : 3;
+                getCurrentPreset().ch = Math.min(value, 3);
             }
             break;
             case 94: {
-                getCurrentPreset().sym = value <= 7 ? value : 7;
+                getCurrentPreset().sym = Math.min(value, 7);
             }
             break;
             case 71: {
-                getCurrentPreset().fRes = value <= 5 ? value : 5;
+                getCurrentPreset().fRes = Math.min(value, 5);
             }
             break;
             case 78: {
@@ -165,10 +164,11 @@ public class TRIEditor extends JPanel implements Receiver {
     DefaultListModel<String> listModelMidiIn = new DefaultListModel<>();
     DefaultListModel<String> listModelMidiOut = new DefaultListModel<>();
 
-    JTextField tPresetFile = new JTextField(); //TODO Pas utile => on demande systématiquement ?
-    JButton bLoadFromFile = new JButton("Load Preset from File");
-    JButton bSaveToFile = new JButton("Save Preset File To...");
+   // JTextField tPresetFile = new JTextField(); //TODO Pas utile => on demande systématiquement ?
+   // JButton bLoadFromFile = new JButton("Load Preset from File");
+   // JButton bSaveToFile = new JButton("Save Preset File To...");
     JButton bGetFromTeensy = new JButton("Get Preset from Teensy");
+    JSpinner spGetFromTeensy = new JSpinner(new SpinnerNumberModel(0, 0, 127, 1));
     JButton bSaveToTeensy = new JButton("Save Preset to Teensy");
     JSpinner spSaveToTeensy = new JSpinner(new SpinnerNumberModel(0, 0, 127, 1));
 
@@ -182,8 +182,8 @@ public class TRIEditor extends JPanel implements Receiver {
     Transmitter trMidiIn = null;
 
 
-    DefaultListModel<String> listModelPresets = new DefaultListModel<>();
-    JList<String> jlPresets;
+ //   DefaultListModel<String> listModelPresets = new DefaultListModel<>();
+ //   JList<String> jlPresets;
 
 
     JButton[] bPads = new JButton[40];
@@ -326,13 +326,26 @@ public class TRIEditor extends JPanel implements Receiver {
             throw new RuntimeException(e);
         }
     }
+    void sendPC(int pc) {
+        if (rcMidiOut == null) {
+            return;
+        }
+        try {
+            ShortMessage m = new ShortMessage(ShortMessage.PROGRAM_CHANGE,
+                    0, pc, 0);
+            rcMidiOut.send(m, -1);
+        } catch (InvalidMidiDataException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     void sendNoteOn(int note, int vel) {
         if (rcMidiOut == null) {
             return;
         }
         ShortMessage m = new ShortMessage();
         try {
-            m.setMessage(CONTROL_NOTE_ON, 0, note, vel);
+            m.setMessage(ShortMessage.NOTE_ON, 0, note, vel);
             rcMidiOut.send(m, -1);
         } catch (InvalidMidiDataException e) {
             throw new RuntimeException(e);
@@ -503,10 +516,11 @@ public class TRIEditor extends JPanel implements Receiver {
             c.gridx = 0;
             c.gridy = 0;
             panel.add(bGetFromTeensy, c);
+            c.gridx = 1;
+            panel.add(spGetFromTeensy, c);
             bSaveToTeensy.addActionListener(this::saveToTeensy);
             c.gridy = 1;
             c.gridx = 0;
-
             panel.add(bSaveToTeensy, c);
             c.gridx = 1;
             panel.add(spSaveToTeensy, c);
@@ -754,12 +768,12 @@ public class TRIEditor extends JPanel implements Receiver {
         litPadLFF = getCurrentPreset().mFunc;
     }
 
-    void presetSelected(ListSelectionEvent e) {
+/*    void presetSelected(ListSelectionEvent e) {
         numCurrentPreset = jlPresets.getSelectedIndex();
         sendPreset(getCurrentPreset());
         updateGUIfromPreset();
     }
-
+*/
     void midiInSelected(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) return;
         System.out.println("Midi in selected");
@@ -834,7 +848,7 @@ public class TRIEditor extends JPanel implements Receiver {
         sendCC(91, p.rev);
         sendCC(93, p.ch);
     }
-
+/*
     void loadClicked(ActionEvent e) {
         JFileChooser fc = new JFileChooser("d:", FileSystemView.getFileSystemView());
         fc.setAcceptAllFileFilterUsed(false);
@@ -847,10 +861,11 @@ public class TRIEditor extends JPanel implements Receiver {
         System.out.println(fc.getSelectedFile().getAbsolutePath());
 
     }
-
+*/
     void getFromTeensy(ActionEvent e) {
+        sendPC((Integer) spGetFromTeensy.getValue());
         sendCC(118, 0);
-        //TODO: get from teensy
+
     }
 
     void saveToTeensy(ActionEvent e) {
@@ -1053,6 +1068,8 @@ public class TRIEditor extends JPanel implements Receiver {
 
         //Create and set up the content pane.
         JComponent newContentPane = new TRIEditor();
+
+        newContentPane.setPreferredSize(new Dimension(900,800));
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
